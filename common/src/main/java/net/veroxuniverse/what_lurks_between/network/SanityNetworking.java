@@ -27,10 +27,6 @@ public class SanityNetworking {
         }
     }
 
-    public static void register() {
-        NetworkManager.registerS2CPayloadType(TYPE, CODEC);
-    }
-
     public static void syncToClient(Player player, float value) {
         if (player instanceof ServerPlayer serverPlayer) {
             NetworkManager.sendToPlayer(serverPlayer, new SanitySyncPayload(value));
