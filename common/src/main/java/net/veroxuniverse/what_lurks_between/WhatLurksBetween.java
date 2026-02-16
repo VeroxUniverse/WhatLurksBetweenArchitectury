@@ -7,7 +7,7 @@ public final class WhatLurksBetween {
     public static final String MOD_ID = "what_lurks_between";
 
     public static void init() {
-        //SanityNetworking.register();
+        SanityNetworking.register();
         SanityEventHandler.init();
     }
 }

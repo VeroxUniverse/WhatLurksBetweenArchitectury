@@ -12,7 +12,6 @@ import net.minecraft.server.level.ServerPlayer;
 
 public class SanityNetworking {
     public static final ResourceLocation SANITY_PACKET_ID = ResourceLocation.fromNamespaceAndPath(WhatLurksBetween.MOD_ID, "sanity_sync");
-
     public static final CustomPacketPayload.Type<SanitySyncPayload> TYPE = new CustomPacketPayload.Type<>(SANITY_PACKET_ID);
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SanitySyncPayload> CODEC = StreamCodec.composite(
@@ -21,10 +20,13 @@ public class SanityNetworking {
     );
 
     public record SanitySyncPayload(float value) implements CustomPacketPayload {
-        @Override
-        public Type<? extends CustomPacketPayload> type() {
-            return TYPE;
-        }
+        @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
+    }
+
+    public static void register() {
+        dev.architectury.utils.EnvExecutor.runInEnv(dev.architectury.utils.Env.SERVER, () -> () -> {
+            NetworkManager.registerS2CPayloadType(TYPE, CODEC);
+        });
     }
 
     public static void syncToClient(Player player, float value) {
