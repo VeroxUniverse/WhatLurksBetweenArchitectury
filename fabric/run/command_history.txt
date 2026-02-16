@@ -1,0 +1,4 @@
+/difficulty peaceful
+/give @a minecraft:torch
+/give @a bed
+/give @a minecraft:red_bed
