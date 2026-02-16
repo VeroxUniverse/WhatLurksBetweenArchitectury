@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "what_lurks_between",
+  "version": "${version}",
+  "name": "What Lurks Between",
+  "description": "",
+  "authors": [
+    "VeroxUniverse"
+  ],
+  "contact": {
+    "homepage": ""
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/what_lurks_between/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.veroxuniverse.what_lurks_between.fabric.WhatLurksBetweenFabric"
+    ],
+    "client": [
+      "net.veroxuniverse.what_lurks_between.fabric.client.WhatLurksBetweenFabricClient"
+    ]
+  },
+  "mixins": [
+    "what_lurks_between.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.18.4",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "architectury": ">=13.0.8",
+    "fabric-api": "*",
+    "geckolib": ">=4.5.3"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
