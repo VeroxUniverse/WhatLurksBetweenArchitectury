@@ -5,7 +5,7 @@ architectury {
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
 
-    compileOnly "me.shedaniel.cloth:cloth-config:15.0.127"
+    compileOnly "me.shedaniel.cloth:cloth-config:${rootProject.cloth_config_version}"
 
     modImplementation "dev.architectury:architectury:$rootProject.architectury_api_version"
     modImplementation "software.bernie.geckolib:geckolib-common-${rootProject.geckolib_version}"

@@ -17,7 +17,7 @@
 
   "text.autoconfig.what_lurks_between.title": "What Lurks Between Settings",
 
-  "text.autoconfig.what_lurks_between.category.light_logic": "Light & Sanity",
+  "text.autoconfig.what_lurks_between.category.light_logic": "Sanity Settings",
   "text.autoconfig.what_lurks_between.option.darknessThreshold": "Darkness Threshold",
   "text.autoconfig.what_lurks_between.option.darknessThreshold.@Tooltip": "Light level below which sanity starts to drain (0-15).",
   "text.autoconfig.what_lurks_between.option.brightnessThreshold": "Brightness Threshold",
