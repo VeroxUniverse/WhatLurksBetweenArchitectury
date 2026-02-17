@@ -1,85 +1,170 @@
 package net.veroxuniverse.what_lurks_between.sanity;
 
-import dev.architectury.event.events.common.LifecycleEvent;
+import com.mojang.brigadier.arguments.FloatArgumentType;
+import dev.architectury.event.events.common.CommandRegistrationEvent;
+import dev.architectury.event.events.common.PlayerEvent;
 import dev.architectury.event.events.common.TickEvent;
+import me.shedaniel.autoconfig.AutoConfig;
+import net.minecraft.ChatFormatting;
+import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.veroxuniverse.what_lurks_between.api.SanityAPI;
+import net.veroxuniverse.what_lurks_between.api.ISanityCondition;
+import net.veroxuniverse.what_lurks_between.config.SanityConfig;
 import net.veroxuniverse.what_lurks_between.network.SanityNetworking;
 
 public class SanityEventHandler {
 
-    public static void init() {
-        TickEvent.PLAYER_POST.register(SanityEventHandler::onPlayerTick);
-
-        LifecycleEvent.SERVER_STARTED.register(server -> {
-            SanitySavedData.get(server);
-            System.out.println("[WhatLurksBetween] Sanity data loaded on server start.");
-        });
-
-        LifecycleEvent.SERVER_LEVEL_SAVE.register(level -> {
-            if (level.getServer() != null) {
-                SanitySavedData.get(level.getServer()).setDirty();
-                System.out.println("[WhatLurksBetween] Sanity data marked dirty for saving.");
-            }
-        });
-
-        dev.architectury.event.events.common.PlayerEvent.PLAYER_JOIN.register(player -> {
-            if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
-                float savedValue = SanityAPI.getSanity(serverPlayer);
-                System.out.println("[WhatLurksBetween] Player joined. Syncing saved sanity: " + savedValue);
-                SanityNetworking.syncToClient(serverPlayer, savedValue);
-            }
-        });
-    }
+    private static boolean debugEnabled = false;
 
     private static final String[] SLEEP_MESSAGE_KEYS = {
             "message.what_lurks_between.sleep_1",
             "message.what_lurks_between.sleep_2",
             "message.what_lurks_between.sleep_3",
             "message.what_lurks_between.sleep_4",
-            "message.what_lurks_between.sleep_5"
+            "message.what_lurks_between.sleep_5",
+            "message.what_lurks_between.sleep_6"
     };
 
+    private static final String[] CULTIST_SLEEP_MESSAGE_KEYS = {
+            "message.what_lurks_between.sleep_cultist_1",
+            "message.what_lurks_between.sleep_cultist_2",
+            "message.what_lurks_between.sleep_cultist_3"
+    };
+
+    public static void init() {
+        TickEvent.PLAYER_POST.register(SanityEventHandler::onPlayerTick);
+
+        PlayerEvent.PLAYER_JOIN.register(player -> {
+            if (player instanceof ServerPlayer sp) {
+                SanityNetworking.syncToClient(sp, SanityAPI.getSanity(sp));
+            }
+        });
+
+        CommandRegistrationEvent.EVENT.register((dispatcher, registry, selection) -> {
+            var baseCmd = Commands.literal("wlb").requires(s -> s.hasPermission(2));
+
+            // Sanity Commands (set/get)
+            baseCmd.then(Commands.literal("sanity")
+                    .then(Commands.literal("set").then(Commands.argument("value", FloatArgumentType.floatArg(0, 100)).executes(c -> {
+                        ServerPlayer p = c.getSource().getPlayerOrException();
+                        float value = FloatArgumentType.getFloat(c, "value");
+                        SanityAPI.modifySanity(p, value - SanityAPI.getSanity(p));
+                        c.getSource().sendSuccess(() -> Component.literal("§aSanity set to: " + String.format("%.1f", SanityAPI.getSanity(p))), true);
+                        return 1;
+                    })))
+                    .then(Commands.literal("get").executes(c -> {
+                        ServerPlayer p = c.getSource().getPlayerOrException();
+                        c.getSource().sendSuccess(() -> Component.literal("§eCurrent Sanity: " + String.format("%.1f", SanityAPI.getSanity(p))), false);
+                        return 1;
+                    })));
+
+            // Cultist Commands
+            baseCmd.then(Commands.literal("cultist")
+                    .then(Commands.literal("on").executes(c -> {
+                        SanityAPI.setCultist(c.getSource().getPlayerOrException(), true);
+                        c.getSource().sendSuccess(() -> Component.literal("§dCultist mode enabled!"), true);
+                        return 1;
+                    }))
+                    .then(Commands.literal("off").executes(c -> {
+                        SanityAPI.setCultist(c.getSource().getPlayerOrException(), false);
+                        c.getSource().sendSuccess(() -> Component.literal("§7Cultist mode disabled."), true);
+                        return 1;
+                    })));
+
+            // Debug Command
+            baseCmd.then(Commands.literal("debug")
+                    .then(Commands.literal("on").executes(c -> {
+                        debugEnabled = true;
+                        c.getSource().sendSuccess(() -> Component.literal("§6Sanity Debug: §aEnabled"), true);
+                        return 1;
+                    }))
+                    .then(Commands.literal("off").executes(c -> {
+                        debugEnabled = false;
+                        c.getSource().sendSuccess(() -> Component.literal("§6Sanity Debug: §cDisabled"), true);
+                        return 1;
+                    })));
+
+            // Reload Command
+            baseCmd.then(Commands.literal("reload").executes(c -> {
+                AutoConfig.getConfigHolder(SanityConfig.class).load();
+                SanityConfig.INSTANCE = AutoConfig.getConfigHolder(SanityConfig.class).getConfig();
+                c.getSource().sendSuccess(() -> Component.literal("§aConfig reloaded from file!"), true);
+                return 1;
+            }));
+
+            dispatcher.register(baseCmd);
+            dispatcher.register(Commands.literal("whatlurksbetween").redirect(dispatcher.getRoot().getChild("wlb")));
+        });
+    }
+
     private static void onPlayerTick(Player player) {
-        if (player.level().isClientSide) return;
+        if (!player.level().isClientSide) {
+            if (player.isSleeping() && player.getSleepTimer() >= 99) {
+                if (!SanityConditionManager.isBlocked(player, ISanityCondition.ConditionType.RESET)) {
+                    float current = SanityAPI.getSanity(player);
+                    boolean isCultist = SanityAPI.isCultist(player);
 
-        if (player.isSleeping() && player.getSleepTimer() >= 99) {
-            float current = SanityAPI.getSanity(player);
-            if (current < 100f) {
-                SanityAPI.modifySanity(player, 100f - current);
+                    if (current < 100f) {
+                        float amountToHeal;
+                        if (SanityConfig.INSTANCE.sleepResetsCompletely) {
+                            amountToHeal = 100f - current;
+                        } else {
+                            amountToHeal = Math.min(SanityConfig.INSTANCE.sanityGainFromSleep, 100f - current);
+                        }
 
-                String randomKey = SLEEP_MESSAGE_KEYS[player.getRandom().nextInt(SLEEP_MESSAGE_KEYS.length)];
+                        if (amountToHeal > 0) {
+                            SanityAPI.modifySanity(player, amountToHeal);
+                            String randomKey;
+                            ChatFormatting color;
 
-                player.displayClientMessage(
-                        Component.translatable(randomKey).withStyle(net.minecraft.ChatFormatting.GREEN),
-                        true
-                );
+                            if (isCultist) {
+                                randomKey = CULTIST_SLEEP_MESSAGE_KEYS[player.getRandom().nextInt(CULTIST_SLEEP_MESSAGE_KEYS.length)];
+                                color = ChatFormatting.DARK_PURPLE;
+                            } else {
+                                randomKey = SLEEP_MESSAGE_KEYS[player.getRandom().nextInt(SLEEP_MESSAGE_KEYS.length)];
+                                color = ChatFormatting.GREEN;
+                            }
+                            player.sendSystemMessage(Component.translatable(randomKey).withStyle(color));
+                        }
+                    }
+                }
+            }
+
+            if (player.tickCount % 20 == 0) {
+                handleSanityLogic(player);
             }
         }
 
         if (player.tickCount % 20 == 0) {
-            handleSanityLogic(player);
             SanityEffectManager.tick(player);
         }
     }
 
     private static void handleSanityLogic(Player player) {
         int light = player.level().getMaxLocalRawBrightness(player.blockPosition());
+        boolean cultist = SanityAPI.isCultist(player);
+        float modifier = SanityAPI.getSanityModifier(player);
 
-        if (light < 4) {
-            SanityAPI.modifySanity(player, -0.5f);
-        } else if (light > 12) {
-            SanityAPI.modifySanity(player, 0.2f);
+        if (light < SanityConfig.INSTANCE.darknessThreshold) {
+            if (!SanityConditionManager.isBlocked(player, ISanityCondition.ConditionType.DECREASE)) {
+                SanityAPI.modifySanity(player, SanityConfig.INSTANCE.sanityReduction * modifier);
+            }
+        } else if (light > SanityConfig.INSTANCE.brightnessThreshold) {
+            if (!SanityConditionManager.isBlocked(player, ISanityCondition.ConditionType.INCREASE)) {
+                SanityAPI.modifySanity(player, SanityConfig.INSTANCE.sanityGain * modifier);
+            }
         }
 
-        // Debug Actionbar
-        player.displayClientMessage(
-                net.minecraft.network.chat.Component.literal(
-                        "§eSanity: §f" + String.format("%.1f", SanityAPI.getSanity(player)) +
-                                " §8| §bLight: §f" + light
-                ),
-                true
-        );
+        if (debugEnabled) {
+            String modeInfo = cultist ? "§d[Cultist Mode]" : "§b[Human Mode]";
+            player.displayClientMessage(
+                    Component.literal("§eSanity: §f" + String.format("%.1f", SanityAPI.getSanity(player)) +
+                            " §8| §eLight: §f" + light + " §8| §6Mod: §f" + String.format("%.1f", modifier) + " " + modeInfo),
+                    true
+            );
+        }
     }
 }

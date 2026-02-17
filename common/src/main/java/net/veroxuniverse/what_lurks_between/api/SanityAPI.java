@@ -1,36 +1,68 @@
 package net.veroxuniverse.what_lurks_between.api;
 
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.veroxuniverse.what_lurks_between.network.SanityNetworking;
+import net.veroxuniverse.what_lurks_between.registry.ModAttributes;
+import net.veroxuniverse.what_lurks_between.registry.ModMobEffects;
 import net.veroxuniverse.what_lurks_between.sanity.SanityData;
 import net.veroxuniverse.what_lurks_between.sanity.SanitySavedData;
-
-import java.util.Map;
 import java.util.UUID;
 
 public class SanityAPI {
 
     public static float getSanity(Player player) {
-        if (player.getServer() == null) return 100f; // Client-Fallback
+        if (player.getServer() == null) return 100f;
+        return SanitySavedData.get(player.getServer()).getSanityMap()
+                .getOrDefault(player.getUUID(), new SanityData(100f)).value();
+    }
 
-        Map<UUID, SanityData> storage = SanitySavedData.get(player.getServer()).getMap();
-        return storage.getOrDefault(player.getUUID(), new SanityData(100f)).value();
+    public static boolean isCultist(Player player) {
+        if (player.getServer() == null) return false;
+        return SanitySavedData.get(player.getServer()).getCultistMap()
+                .getOrDefault(player.getUUID(), false);
+    }
+
+    public static void setCultist(Player player, boolean value) {
+        if (player.getServer() == null) return;
+        SanitySavedData data = SanitySavedData.get(player.getServer());
+        data.getCultistMap().put(player.getUUID(), value);
+        data.setDirty();
+        SanityNetworking.syncToClient(player, getSanity(player));
     }
 
     public static void modifySanity(Player player, float amount) {
         if (player.level().isClientSide() || player.getServer() == null) return;
-
         SanitySavedData savedData = SanitySavedData.get(player.getServer());
-
         UUID uuid = player.getUUID();
-        Map<UUID, SanityData> storage = savedData.getMap();
-        SanityData oldData = storage.getOrDefault(uuid, new SanityData(100f));
+
+        SanityData oldData = savedData.getSanityMap().getOrDefault(uuid, new SanityData(100f));
         SanityData newData = oldData.add(amount);
-
-        storage.put(uuid, newData);
-
+        savedData.getSanityMap().put(uuid, newData);
         savedData.setDirty();
 
         SanityNetworking.syncToClient(player, newData.value());
+    }
+
+    public static float getSanityModifier(Player player) {
+        float modifier = 1.0f;
+
+        var attributeInstance = player.getAttribute(ModAttributes.SANITY_RESISTANCE);
+        if (attributeInstance != null) {
+            float resistance = (float) attributeInstance.getValue();
+            modifier *= (1.0f - Math.min(resistance, 1.0f));
+        }
+
+        for (ItemStack stack : player.getArmorSlots()) {
+            if (!stack.isEmpty() && stack.getItem() instanceof ISanityModifier sanityItem) {
+                modifier *= sanityItem.getSanityResistance(stack);
+            }
+        }
+
+        if (player.hasEffect(ModMobEffects.SANITY_PROTECTION)) {
+            modifier *= 0.5f;
+        }
+
+        return modifier;
     }
 }

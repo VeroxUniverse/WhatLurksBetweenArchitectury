@@ -13,9 +13,12 @@ allprojects {
     version = rootProject.mod_version
 
     repositories {
-        // GECKOLIB Maven Repository
+        maven { url "https://maven.shedaniel.me/" }
+        maven { url "https://maven.terraformersmc.com/" }
         maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
         maven { url 'https://maven.blamejared.com' }
+        maven { url "https://maven.terraformersmc.com/releases/" }
+        mavenCentral()
     }
 }
 

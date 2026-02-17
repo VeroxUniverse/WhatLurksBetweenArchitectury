@@ -2,6 +2,8 @@ package net.veroxuniverse.what_lurks_between.sanity;
 
 import net.minecraft.world.entity.player.Player;
 import net.veroxuniverse.what_lurks_between.api.SanityAPI;
+import net.veroxuniverse.what_lurks_between.client.ClientSanityData;
+import net.veroxuniverse.what_lurks_between.sanity.effects.FootstepEffect;
 import net.veroxuniverse.what_lurks_between.sanity.effects.WhisperingEffect;
 
 import java.util.ArrayList;
@@ -12,10 +14,23 @@ public class SanityEffectManager {
 
     static {
         EFFECTS.add(new WhisperingEffect());
+        EFFECTS.add(new FootstepEffect());
     }
 
     public static void tick(Player player) {
-        float sanity = SanityAPI.getSanity(player);
+        float sanity;
+        boolean cultist;
+
+        if (player.level().isClientSide()) {
+            sanity = ClientSanityData.getSanity();
+            cultist = ClientSanityData.isCultist();
+        } else {
+            sanity = SanityAPI.getSanity(player);
+            cultist = SanityAPI.isCultist(player);
+        }
+
+        if (cultist) return;
+
         boolean isClient = player.level().isClientSide();
 
         for (ISanityEffect effect : EFFECTS) {

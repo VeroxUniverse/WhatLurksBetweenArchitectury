@@ -6,12 +6,12 @@ import net.veroxuniverse.what_lurks_between.network.SanityNetworking;
 public class WhatLurksBetweenClient {
     public static void initClient() {
         SanityHudRenderer.init();
+        SanityVignetteRenderer.init();
 
-        NetworkManager.registerReceiver(NetworkManager.Side.S2C,
-                SanityNetworking.TYPE, SanityNetworking.CODEC, (payload, context) -> {
-                    context.queue(() -> {
-                        ClientSanityData.setClientSanity(payload.value());
-                    });
-                });
+        NetworkManager.registerReceiver(NetworkManager.Side.S2C, SanityNetworking.TYPE, SanityNetworking.CODEC, (payload, context) -> {
+            context.queue(() -> {
+                ClientSanityData.setClientData(payload.value(), payload.isCultist());
+            });
+        });
     }
 }

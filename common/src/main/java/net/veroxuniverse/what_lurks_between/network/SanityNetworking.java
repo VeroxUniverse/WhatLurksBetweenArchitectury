@@ -6,9 +6,10 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.veroxuniverse.what_lurks_between.WhatLurksBetween;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.veroxuniverse.what_lurks_between.WhatLurksBetween;
+import net.veroxuniverse.what_lurks_between.api.SanityAPI;
 
 public class SanityNetworking {
     public static final ResourceLocation SANITY_PACKET_ID = ResourceLocation.fromNamespaceAndPath(WhatLurksBetween.MOD_ID, "sanity_sync");
@@ -16,10 +17,11 @@ public class SanityNetworking {
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SanitySyncPayload> CODEC = StreamCodec.composite(
             ByteBufCodecs.FLOAT, SanitySyncPayload::value,
+            ByteBufCodecs.BOOL, SanitySyncPayload::isCultist,
             SanitySyncPayload::new
     );
 
-    public record SanitySyncPayload(float value) implements CustomPacketPayload {
+    public record SanitySyncPayload(float value, boolean isCultist) implements CustomPacketPayload {
         @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
 
@@ -31,7 +33,8 @@ public class SanityNetworking {
 
     public static void syncToClient(Player player, float value) {
         if (player instanceof ServerPlayer serverPlayer) {
-            NetworkManager.sendToPlayer(serverPlayer, new SanitySyncPayload(value));
+            boolean cultist = SanityAPI.isCultist(player);
+            NetworkManager.sendToPlayer(serverPlayer, new SanitySyncPayload(value, cultist));
         }
     }
 }

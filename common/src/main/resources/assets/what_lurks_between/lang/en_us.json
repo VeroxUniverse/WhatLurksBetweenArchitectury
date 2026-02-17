@@ -4,7 +4,34 @@
   "message.what_lurks_between.sleep_3": "The morning light brings some comfort.",
   "message.what_lurks_between.sleep_4": "The nightmares fade... for now.",
   "message.what_lurks_between.sleep_5": "You feel a bit more like yourself again.",
+  "message.what_lurks_between.sleep_6": "67",
 
-  "effect.what_lurks_between.heartbeat": "You feel your heart racing...",
-  "gui.what_lurks_between.sanity_label": "Sanity"
+  "message.what_lurks_between.sleep_cultist_1": "The abyss spoke to you in your dreams.",
+  "message.what_lurks_between.sleep_cultist_2": "You feel the darkness pulse within you.",
+  "message.what_lurks_between.sleep_cultist_3": "The shadows welcomed your rest.",
+
+  "gui.what_lurks_between.sanity_label": "Sanity",
+
+  "attribute.what_lurks_between.sanity_resistance": "Sanity Resistance",
+  "effect.what_lurks_between.sanity_protection": "Mental Clarity",
+
+  "text.autoconfig.what_lurks_between.title": "What Lurks Between Settings",
+
+  "text.autoconfig.what_lurks_between.category.light_logic": "Light & Sanity",
+  "text.autoconfig.what_lurks_between.option.darknessThreshold": "Darkness Threshold",
+  "text.autoconfig.what_lurks_between.option.darknessThreshold.@Tooltip": "Light level below which sanity starts to drain (0-15).",
+  "text.autoconfig.what_lurks_between.option.brightnessThreshold": "Brightness Threshold",
+  "text.autoconfig.what_lurks_between.option.brightnessThreshold.@Tooltip": "Light level above which sanity starts to recover.",
+  "text.autoconfig.what_lurks_between.option.sanityReduction": "Sanity Drain Speed",
+  "text.autoconfig.what_lurks_between.option.sanityReduction.@Tooltip": "How fast sanity drops in the dark.",
+  "text.autoconfig.what_lurks_between.option.sanityGain": "Sanity Recovery Speed",
+  "text.autoconfig.what_lurks_between.option.sanityGain.@Tooltip": "How fast sanity recovers in the light.",
+
+  "text.autoconfig.what_lurks_between.category.sleep": "Sleep Settings",
+  "text.autoconfig.what_lurks_between.option.sleepResetsCompletely": "Full Sleep Reset",
+  "text.autoconfig.what_lurks_between.option.sleepResetsCompletely.@Tooltip": "If enabled, sleeping will set sanity back to 100%.",
+  "text.autoconfig.what_lurks_between.option.sanityGainFromSleep": "Sanity Gain on Wake-up",
+  "text.autoconfig.what_lurks_between.option.sanityGainFromSleep.@Tooltip": "Fixed amount of sanity restored after sleeping (if not full reset).",
+
+  "text.autoconfig.what_lurks_between.category.default": "Default Settings"
 }

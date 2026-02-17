@@ -19,6 +19,9 @@
     ],
     "client": [
       "net.veroxuniverse.what_lurks_between.fabric.client.WhatLurksBetweenFabricClient"
+    ],
+    "modmenu": [
+      "net.veroxuniverse.what_lurks_between.fabric.ModMenuIntegration"
     ]
   },
   "mixins": [
@@ -30,9 +33,10 @@
     "java": ">=21",
     "architectury": ">=13.0.8",
     "fabric-api": "*",
-    "geckolib": ">=4.5.3"
+    "geckolib": ">=4.5.3",
+    "cloth-config2": "*"
   },
   "suggests": {
-    "another-mod": "*"
+    "modmenu": "*"
   }
 }
