@@ -1,7 +1,9 @@
 package net.veroxuniverse.what_lurks_between.client;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import dev.architectury.event.events.client.ClientGuiEvent;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.veroxuniverse.what_lurks_between.WhatLurksBetween;
@@ -20,29 +22,36 @@ public class SanityHudRenderer {
 
             float sanity = ClientSanityData.getSanity();
             boolean isCultist = ClientSanityData.isCultist();
-
             float stressLevel = isCultist ? sanity : (100f - sanity);
 
-            int u = (sanity < 20) ? 48 : (sanity < 40) ? 32 : (sanity < 60) ? 16 : 0;
-
             if (sanity > 80 && !isCultist) return;
+
+            int u = (sanity < 20) ? 48 : (sanity < 40) ? 32 : (sanity < 60) ? 16 : 0;
 
             int x = guiGraphics.guiWidth() / 2 - 8;
             int y = guiGraphics.guiHeight() - 42 - 11;
 
             if (stressLevel > 80) {
                 if (mc.level.getGameTime() % 3 == 0) {
-                    lastXOffset = RANDOM.nextInt(3) - 1; // Range 1 (-1, 0, 1)
+                    lastXOffset = RANDOM.nextInt(3) - 1;
                     lastYOffset = RANDOM.nextInt(3) - 1;
                 }
                 x += lastXOffset;
                 y += lastYOffset;
-            } else {
-                lastXOffset = 0;
-                lastYOffset = 0;
             }
 
+            guiGraphics.pose().pushPose();
+
+            RenderSystem.disableDepthTest();
+            RenderSystem.enableBlend();
+            RenderSystem.defaultBlendFunc();
+
+            guiGraphics.pose().translate(0, 0, 150);
+
             guiGraphics.blit(EYE_TEX, x, y, u, 0, 16, 16, 64, 16);
+
+            RenderSystem.enableDepthTest();
+            guiGraphics.pose().popPose();
         });
     }
 }
