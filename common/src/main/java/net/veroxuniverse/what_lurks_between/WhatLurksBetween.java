@@ -5,6 +5,7 @@ import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.veroxuniverse.what_lurks_between.config.SanityConfig;
 import net.veroxuniverse.what_lurks_between.network.SanityNetworking;
 import net.veroxuniverse.what_lurks_between.registry.ModAttributes;
+import net.veroxuniverse.what_lurks_between.registry.ModMobEffects;
 import net.veroxuniverse.what_lurks_between.sanity.SanityEventHandler;
 
 public final class WhatLurksBetween {
@@ -17,5 +18,6 @@ public final class WhatLurksBetween {
         ModAttributes.register();
         SanityNetworking.register();
         SanityEventHandler.init();
+        ModMobEffects.register();
     }
 }

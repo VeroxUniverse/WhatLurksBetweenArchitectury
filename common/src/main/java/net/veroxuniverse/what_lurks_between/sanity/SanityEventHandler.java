@@ -102,7 +102,7 @@ public class SanityEventHandler {
 
     private static void onPlayerTick(Player player) {
         if (!player.level().isClientSide) {
-            if (player.isSleeping() && player.getSleepTimer() >= 99) {
+            if (player.isSleeping() && player.getSleepTimer() == 100) {
                 if (!SanityConditionManager.isBlocked(player, ISanityCondition.ConditionType.RESET)) {
                     float current = SanityAPI.getSanity(player);
                     boolean isCultist = SanityAPI.isCultist(player);

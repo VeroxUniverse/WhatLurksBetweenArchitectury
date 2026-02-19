@@ -3,8 +3,7 @@ package net.veroxuniverse.what_lurks_between.sanity;
 import net.minecraft.world.entity.player.Player;
 import net.veroxuniverse.what_lurks_between.api.SanityAPI;
 import net.veroxuniverse.what_lurks_between.client.ClientSanityData;
-import net.veroxuniverse.what_lurks_between.sanity.effects.FootstepEffect;
-import net.veroxuniverse.what_lurks_between.sanity.effects.WhisperingEffect;
+import net.veroxuniverse.what_lurks_between.sanity.effects.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +14,9 @@ public class SanityEffectManager {
     static {
         EFFECTS.add(new WhisperingEffect());
         EFFECTS.add(new FootstepEffect());
+        EFFECTS.add(new DoorCreakEffect());
+        EFFECTS.add(new FakeCreeperEffect());
+        EFFECTS.add(new HeartbeatEffect());
     }
 
     public static void tick(Player player) {
