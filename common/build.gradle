@@ -20,7 +20,8 @@ sourceSets {
 }
 
 processResources {
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
-
-    exclude '.cache/**'
+    tasks.withType(AbstractCopyTask).configureEach {
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+        exclude '.cache/**'
+    }
 }
