@@ -25,6 +25,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(Blocks.WALL_TORCH)
                 .add(Blocks.LANTERN)
                 .add(Blocks.CAMPFIRE)
+                .add(Blocks.FIRE)
                 .add(Blocks.REDSTONE_LAMP);
 
         tag(BlockTags.WALL_POST_OVERRIDE)
