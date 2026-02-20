@@ -36,4 +36,13 @@ public class SanityConfig implements ConfigData {
     @ConfigEntry.Category("sleep")
     @ConfigEntry.Gui.Tooltip
     public float sanityGainFromSleep = 30.0f;
+
+    @ConfigEntry.Category("effects")
+    @ConfigEntry.Gui.Tooltip
+    public float absoluteDarknessThreshold = 5.0f;
+
+    @ConfigEntry.Category("effects")
+    @ConfigEntry.Gui.Tooltip
+    @ConfigEntry.BoundedDiscrete(min = 1, max = 16)
+    public int extinguishRadius = 6;
 }

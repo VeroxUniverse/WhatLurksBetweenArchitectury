@@ -6,6 +6,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.veroxuniverse.what_lurks_between.WhatLurksBetween;
+import net.veroxuniverse.what_lurks_between.effect.AbsoluteDarknessEffect;
+import net.veroxuniverse.what_lurks_between.effect.SanityProtectionEffect;
 
 public class ModMobEffects {
     public static final DeferredRegister<MobEffect> MOB_EFFECTS =
@@ -16,13 +18,12 @@ public class ModMobEffects {
             () -> new SanityProtectionEffect(MobEffectCategory.BENEFICIAL, 0xADD8E6)
     );
 
+    public static final RegistrySupplier<MobEffect> ABSOLUTE_DARKNESS = MOB_EFFECTS.register(
+            "absolute_darkness",
+            () -> new AbsoluteDarknessEffect(MobEffectCategory.HARMFUL, 0x0A0A0A)
+    );
+
     public static void register() {
         MOB_EFFECTS.register();
-    }
-
-    private static class SanityProtectionEffect extends MobEffect {
-        protected SanityProtectionEffect(MobEffectCategory category, int color) {
-            super(category, color);
-        }
     }
 }

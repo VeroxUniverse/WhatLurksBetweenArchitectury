@@ -10,6 +10,7 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.veroxuniverse.what_lurks_between.WhatLurksBetween;
 import net.veroxuniverse.what_lurks_between.client.WhatLurksBetweenClient;
 import net.veroxuniverse.what_lurks_between.config.SanityConfig;
+import net.veroxuniverse.what_lurks_between.registry.ModMobEffects;
 
 @Mod(WhatLurksBetween.MOD_ID)
 public final class WhatLurksBetweenNeoForge {

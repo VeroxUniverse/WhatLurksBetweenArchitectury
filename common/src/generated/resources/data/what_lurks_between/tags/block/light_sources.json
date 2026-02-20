@@ -1,0 +1,9 @@
+{
+  "values": [
+    "minecraft:torch",
+    "minecraft:wall_torch",
+    "minecraft:lantern",
+    "minecraft:campfire",
+    "minecraft:redstone_lamp"
+  ]
+}

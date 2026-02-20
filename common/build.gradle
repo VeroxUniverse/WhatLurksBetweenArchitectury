@@ -10,3 +10,17 @@ dependencies {
     modImplementation "dev.architectury:architectury:$rootProject.architectury_api_version"
     modImplementation "software.bernie.geckolib:geckolib-common-${rootProject.geckolib_version}"
 }
+
+sourceSets {
+    main {
+        resources {
+            srcDir 'src/generated/resources'
+        }
+    }
+}
+
+processResources {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+
+    exclude '.cache/**'
+}

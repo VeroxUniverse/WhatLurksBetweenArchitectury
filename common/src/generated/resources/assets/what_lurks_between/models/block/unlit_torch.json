@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/torch",
+  "textures": {
+    "torch": "what_lurks_between:block/unlit_torch"
+  }
+}

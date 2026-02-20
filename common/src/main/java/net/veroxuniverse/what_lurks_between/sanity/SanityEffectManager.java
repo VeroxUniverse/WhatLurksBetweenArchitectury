@@ -17,6 +17,7 @@ public class SanityEffectManager {
         EFFECTS.add(new DoorCreakEffect());
         EFFECTS.add(new FakeCreeperEffect());
         EFFECTS.add(new HeartbeatEffect());
+        EFFECTS.add(new AbsoluteDarknessSanityEffect());
     }
 
     public static void tick(Player player) {

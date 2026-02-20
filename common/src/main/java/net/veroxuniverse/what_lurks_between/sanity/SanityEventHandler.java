@@ -10,10 +10,12 @@ import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.veroxuniverse.what_lurks_between.api.SanityAPI;
 import net.veroxuniverse.what_lurks_between.api.ISanityCondition;
+import net.veroxuniverse.what_lurks_between.api.SanityAPI;
 import net.veroxuniverse.what_lurks_between.config.SanityConfig;
 import net.veroxuniverse.what_lurks_between.network.SanityNetworking;
+import net.veroxuniverse.what_lurks_between.registry.ModMobEffects;
+import net.veroxuniverse.what_lurks_between.util.LightExtinguisher;
 
 public class SanityEventHandler {
 
@@ -130,6 +132,12 @@ public class SanityEventHandler {
                             player.sendSystemMessage(Component.translatable(randomKey).withStyle(color));
                         }
                     }
+                }
+            }
+
+            if (player.hasEffect(ModMobEffects.ABSOLUTE_DARKNESS)) {
+                if (player.tickCount % 20 == 0) {
+                    LightExtinguisher.extinguishAroundPlayer(player, SanityConfig.INSTANCE.extinguishRadius);
                 }
             }
 

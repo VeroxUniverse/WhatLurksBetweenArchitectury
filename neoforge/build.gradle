@@ -7,6 +7,19 @@ architectury {
     neoForge()
 }
 
+loom {
+    runs {
+        data {
+            data()
+            programArgs "--mod", "what_lurks_between"
+            programArgs "--all"
+            programArgs "--output", file("../common/src/generated/resources").getAbsolutePath()
+            programArgs "--existing", file("../common/src/main/resources").getAbsolutePath()
+            programArgs "--existing-mod", "minecraft"
+        }
+    }
+}
+
 configurations {
     common {
         canBeResolved = true
