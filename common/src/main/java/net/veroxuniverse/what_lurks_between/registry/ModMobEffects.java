@@ -12,10 +12,14 @@ public class ModMobEffects {
     public static final DeferredRegister<MobEffect> MOB_EFFECTS =
             DeferredRegister.create(WhatLurksBetween.MOD_ID, Registries.MOB_EFFECT);
 
-    public static final RegistrySupplier<MobEffect> SANITY_PROTECTION = MOB_EFFECTS.register("sanity_protection", SanityProtectionEffect::new);
+    public static final RegistrySupplier<MobEffect> SANITY_PROTECTION =
+            MOB_EFFECTS.register("sanity_protection", SanityProtectionEffect::new);
 
-    public static final RegistrySupplier<MobEffect> ABSOLUTE_DARKNESS = MOB_EFFECTS.register("absolute_darkness", AbsoluteDarknessEffect::new);
+    public static final RegistrySupplier<MobEffect> ABSOLUTE_DARKNESS =
+            MOB_EFFECTS.register("absolute_darkness", AbsoluteDarknessEffect::new);
 
+
+    private ModMobEffects() {}
 
     public static void register() {
         MOB_EFFECTS.register();

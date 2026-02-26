@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "what_lurks_between:block/mire_mud",
+    "side": "what_lurks_between:block/mossy_mire_mud_side",
+    "top": "what_lurks_between:block/mire_moss"
+  }
+}

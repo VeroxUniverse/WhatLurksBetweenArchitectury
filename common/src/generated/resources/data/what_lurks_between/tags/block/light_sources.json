@@ -4,6 +4,7 @@
     "minecraft:wall_torch",
     "minecraft:lantern",
     "minecraft:campfire",
+    "minecraft:fire",
     "minecraft:redstone_lamp"
   ]
 }

@@ -21,6 +21,13 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         this.add(ModBlocks.UNLIT_WALL_TORCH.get(), block -> this.createSingleItemTable(ModBlocks.UNLIT_TORCH.get()));
 
         this.add(ModBlocks.UNLIT_LANTERN.get(), block -> this.createSingleItemTable(ModBlocks.UNLIT_LANTERN.get()));
+
+        dropSelf(ModBlocks.MIRE_MUD.get());
+        dropSelf(ModBlocks.MIRE_MOSS.get());
+        dropSelf(ModBlocks.MIRE_ROCK.get());
+        dropSelf(ModBlocks.ROCKY_MIRE_MUD.get());
+        this.add(ModBlocks.MOSSY_MIRE_MUD.get(),
+                block -> createSingleItemTableWithSilkTouch(block, ModBlocks.MIRE_MUD.get()));
     }
 
     @Override

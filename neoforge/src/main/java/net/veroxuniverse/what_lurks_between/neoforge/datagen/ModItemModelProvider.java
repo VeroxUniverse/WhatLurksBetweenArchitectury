@@ -17,5 +17,8 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         withExistingParent("unlit_lantern", mcLoc("item/generated"))
                 .texture("layer0", modLoc("item/unlit_lantern"));
+
+        withExistingParent("wet_mire_mud_bucket", mcLoc("item/generated"))
+                .texture("layer0", modLoc("item/wet_mire_mud_bucket"));
     }
 }

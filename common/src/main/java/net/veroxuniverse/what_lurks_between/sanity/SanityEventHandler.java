@@ -1,5 +1,6 @@
 package net.veroxuniverse.what_lurks_between.sanity;
 
+import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 import dev.architectury.event.events.common.CommandRegistrationEvent;
 import dev.architectury.event.events.common.PlayerEvent;
@@ -7,13 +8,18 @@ import dev.architectury.event.events.common.TickEvent;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.Commands;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 import net.veroxuniverse.what_lurks_between.api.ISanityCondition;
 import net.veroxuniverse.what_lurks_between.api.SanityAPI;
 import net.veroxuniverse.what_lurks_between.config.SanityConfig;
 import net.veroxuniverse.what_lurks_between.network.SanityNetworking;
+import net.veroxuniverse.what_lurks_between.registry.ModAttributes;
 import net.veroxuniverse.what_lurks_between.registry.ModMobEffects;
 import net.veroxuniverse.what_lurks_between.util.LightExtinguisher;
 
@@ -45,10 +51,21 @@ public class SanityEventHandler {
             }
         });
 
+        PlayerEvent.PLAYER_RESPAWN.register((player, atCheckpoint, status) -> {
+            if (SanityAPI.getSanity(player) <= 0.1f) {
+                AttributeInstance corruption = player.getAttribute(ModAttributes.CORRUPTION);
+                if (corruption != null) {
+                    double newValue = Math.min(100.0, corruption.getBaseValue() + 5.0);
+                    corruption.setBaseValue(newValue);
+                    player.sendSystemMessage(Component.translatable("message.what_lurks_between.corruption_increased")
+                            .withStyle(ChatFormatting.DARK_RED, ChatFormatting.ITALIC));
+                }
+            }
+        });
+
         CommandRegistrationEvent.EVENT.register((dispatcher, registry, selection) -> {
             var baseCmd = Commands.literal("wlb").requires(s -> s.hasPermission(2));
 
-            // Sanity Commands (set/get)
             baseCmd.then(Commands.literal("sanity")
                     .then(Commands.literal("set").then(Commands.argument("value", FloatArgumentType.floatArg(0, 100)).executes(c -> {
                         ServerPlayer p = c.getSource().getPlayerOrException();
@@ -63,7 +80,22 @@ public class SanityEventHandler {
                         return 1;
                     })));
 
-            // Cultist Commands
+            baseCmd.then(Commands.literal("corruption")
+                    .then(Commands.literal("set").then(Commands.argument("value", DoubleArgumentType.doubleArg(0, 100)).executes(c -> {
+                        ServerPlayer p = c.getSource().getPlayerOrException();
+                        double value = DoubleArgumentType.getDouble(c, "value");
+                        AttributeInstance inst = p.getAttribute(ModAttributes.CORRUPTION);
+                        if (inst != null) inst.setBaseValue(value);
+                        c.getSource().sendSuccess(() -> Component.literal("§dCorruption set to: " + value + "%"), true);
+                        return 1;
+                    })))
+                    .then(Commands.literal("get").executes(c -> {
+                        ServerPlayer p = c.getSource().getPlayerOrException();
+                        double val = p.getAttributeValue(ModAttributes.CORRUPTION);
+                        c.getSource().sendSuccess(() -> Component.literal("§dCurrent Corruption: " + String.format("%.1f", val) + "%"), false);
+                        return 1;
+                    })));
+
             baseCmd.then(Commands.literal("cultist")
                     .then(Commands.literal("on").executes(c -> {
                         SanityAPI.setCultist(c.getSource().getPlayerOrException(), true);
@@ -76,7 +108,6 @@ public class SanityEventHandler {
                         return 1;
                     })));
 
-            // Debug Command
             baseCmd.then(Commands.literal("debug")
                     .then(Commands.literal("on").executes(c -> {
                         debugEnabled = true;
@@ -89,7 +120,6 @@ public class SanityEventHandler {
                         return 1;
                     })));
 
-            // Reload Command
             baseCmd.then(Commands.literal("reload").executes(c -> {
                 AutoConfig.getConfigHolder(SanityConfig.class).load();
                 SanityConfig.INSTANCE = AutoConfig.getConfigHolder(SanityConfig.class).getConfig();
@@ -135,9 +165,13 @@ public class SanityEventHandler {
                 }
             }
 
-            if (player.hasEffect(ModMobEffects.ABSOLUTE_DARKNESS)) {
-                if (player.tickCount % 20 == 0) {
-                    LightExtinguisher.extinguishAroundPlayer(player, SanityConfig.INSTANCE.extinguishRadius);
+            var darknessEffectHolder = player.level().registryAccess()
+                    .registryOrThrow(Registries.MOB_EFFECT)
+                    .getHolderOrThrow(ModMobEffects.ABSOLUTE_DARKNESS.getKey());
+
+            if (player.hasEffect(darknessEffectHolder)) {
+                if (player.tickCount % 20 == 0 && SanityConfig.INSTANCE.absoluteDarkness.extinguishLamps) {
+                    LightExtinguisher.extinguishAroundPlayer(player, SanityConfig.INSTANCE.absoluteDarkness.radius);
                 }
             }
 
@@ -146,7 +180,7 @@ public class SanityEventHandler {
             }
         }
 
-        if (player.tickCount % 20 == 0) {
+        if (player.tickCount % 20 == 0 && SanityConfig.INSTANCE.enableSanityEffects) {
             SanityEffectManager.tick(player);
         }
     }
@@ -156,9 +190,12 @@ public class SanityEventHandler {
         boolean cultist = SanityAPI.isCultist(player);
         float modifier = SanityAPI.getSanityModifier(player);
 
+        double corruption = player.getAttributeValue(ModAttributes.CORRUPTION);
+        float corruptionMult = 1.0f + (float)(corruption / 100.0);
+
         if (light < SanityConfig.INSTANCE.darknessThreshold) {
             if (!SanityConditionManager.isBlocked(player, ISanityCondition.ConditionType.DECREASE)) {
-                SanityAPI.modifySanity(player, SanityConfig.INSTANCE.sanityReduction * modifier);
+                SanityAPI.modifySanity(player, SanityConfig.INSTANCE.sanityReduction * modifier * corruptionMult);
             }
         } else if (light > SanityConfig.INSTANCE.brightnessThreshold) {
             if (!SanityConditionManager.isBlocked(player, ISanityCondition.ConditionType.INCREASE)) {
@@ -170,6 +207,7 @@ public class SanityEventHandler {
             String modeInfo = cultist ? "§d[Cultist Mode]" : "§b[Human Mode]";
             player.displayClientMessage(
                     Component.literal("§eSanity: §f" + String.format("%.1f", SanityAPI.getSanity(player)) +
+                            " §8| §dCorr: §f" + String.format("%.1f", corruption) + "%" +
                             " §8| §eLight: §f" + light + " §8| §6Mod: §f" + String.format("%.1f", modifier) + " " + modeInfo),
                     true
             );

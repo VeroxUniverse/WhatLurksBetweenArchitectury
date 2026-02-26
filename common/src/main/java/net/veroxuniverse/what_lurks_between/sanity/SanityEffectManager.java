@@ -1,8 +1,10 @@
 package net.veroxuniverse.what_lurks_between.sanity;
 
 import net.minecraft.world.entity.player.Player;
+import net.veroxuniverse.what_lurks_between.api.ISanityEffect;
 import net.veroxuniverse.what_lurks_between.api.SanityAPI;
 import net.veroxuniverse.what_lurks_between.client.ClientSanityData;
+import net.veroxuniverse.what_lurks_between.config.SanityConfig;
 import net.veroxuniverse.what_lurks_between.sanity.effects.*;
 
 import java.util.ArrayList;
@@ -38,8 +40,21 @@ public class SanityEffectManager {
 
         for (ISanityEffect effect : EFFECTS) {
             if (sanity <= effect.getThreshold() && effect.isClientSide() == isClient) {
-                effect.apply(player, sanity);
+                if (isEffectEnabled(effect)) {
+                    effect.apply(player, sanity);
+                }
             }
         }
+    }
+
+    private static boolean isEffectEnabled(ISanityEffect effect) {
+        SanityConfig config = SanityConfig.INSTANCE;
+        if (effect instanceof WhisperingEffect) return config.whispering.enabled;
+        if (effect instanceof FootstepEffect) return config.footsteps.enabled;
+        if (effect instanceof DoorCreakEffect) return config.doorCreak.enabled;
+        if (effect instanceof FakeCreeperEffect) return config.fakeCreeper.enabled;
+        if (effect instanceof HeartbeatEffect) return config.heartbeat.enabled;
+        if (effect instanceof AbsoluteDarknessSanityEffect) return true;
+        return true;
     }
 }

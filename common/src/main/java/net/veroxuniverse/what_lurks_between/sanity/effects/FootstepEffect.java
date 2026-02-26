@@ -4,19 +4,18 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
-import net.veroxuniverse.what_lurks_between.sanity.ISanityEffect;
+import net.veroxuniverse.what_lurks_between.api.ISanityEffect;
+import net.veroxuniverse.what_lurks_between.config.SanityConfig;
 
 public class FootstepEffect implements ISanityEffect {
-
     @Override
     public float getThreshold() {
-        return 60f;
+        return SanityConfig.INSTANCE.footsteps.threshold;
     }
 
     @Override
     public void apply(Player player, float currentSanity) {
-        if (player.getRandom().nextFloat() < 0.01f) {
-
+        if (player.getRandom().nextFloat() < SanityConfig.INSTANCE.footsteps.chance) {
             Vec3 backPos = player.position().add(player.getLookAngle().reverse().scale(2.5));
 
             player.level().playLocalSound(

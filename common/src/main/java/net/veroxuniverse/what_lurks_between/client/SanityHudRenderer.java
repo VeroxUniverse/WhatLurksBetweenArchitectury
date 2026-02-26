@@ -3,7 +3,6 @@ package net.veroxuniverse.what_lurks_between.client;
 import com.mojang.blaze3d.systems.RenderSystem;
 import dev.architectury.event.events.client.ClientGuiEvent;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.veroxuniverse.what_lurks_between.WhatLurksBetween;

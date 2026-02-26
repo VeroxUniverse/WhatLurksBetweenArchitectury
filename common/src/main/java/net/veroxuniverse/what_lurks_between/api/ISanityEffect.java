@@ -1,4 +1,4 @@
-package net.veroxuniverse.what_lurks_between.sanity;
+package net.veroxuniverse.what_lurks_between.api;
 
 import net.minecraft.world.entity.player.Player;
 

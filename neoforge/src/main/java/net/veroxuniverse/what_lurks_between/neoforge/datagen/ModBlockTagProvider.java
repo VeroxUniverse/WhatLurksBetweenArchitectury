@@ -28,14 +28,42 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(Blocks.FIRE)
                 .add(Blocks.REDSTONE_LAMP);
 
-        tag(BlockTags.WALL_POST_OVERRIDE)
-                .add(ModBlocks.UNLIT_TORCH.get());
+        tag(BlockTags.MINEABLE_WITH_SHOVEL)
+                .add(ModBlocks.WET_MIRE_MUD.get())
+                .add(ModBlocks.ROCKY_MIRE_MUD.get())
+                .add(ModBlocks.MIRE_MUD.get())
+                .add(ModBlocks.MOSSY_MIRE_MUD.get());
+
+        tag(BlockTags.MINEABLE_WITH_HOE)
+                .add(ModBlocks.MIRE_MOSS.get());
 
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .add(ModBlocks.MIRE_ROCK.get())
                 .add(ModBlocks.UNLIT_LANTERN.get());
 
         tag(BlockTags.NEEDS_STONE_TOOL)
                 .add(ModBlocks.UNLIT_LANTERN.get());
 
+        tag(BlockTags.WALL_POST_OVERRIDE)
+                .add(ModBlocks.UNLIT_TORCH.get());
+
+        this.tag(BlockTags.PREVENT_MOB_SPAWNING_INSIDE)
+                .add(ModBlocks.WET_MIRE_MUD.get());
+
+        tag(BlockTags.DIRT)
+                .add(ModBlocks.WET_MIRE_MUD.get())
+                .add(ModBlocks.ROCKY_MIRE_MUD.get())
+                .add(ModBlocks.MIRE_MUD.get())
+                .add(ModBlocks.MOSSY_MIRE_MUD.get());
+
+        tag(BlockTags.SNOW_LAYER_CAN_SURVIVE_ON)
+                .add(ModBlocks.MIRE_MUD.get())
+                .add(ModBlocks.MOSSY_MIRE_MUD.get());
+
+        tag(ModTags.MIRE_PLANTABLE_ON)
+                .add(ModBlocks.ROCKY_MIRE_MUD.get())
+                .add(ModBlocks.MIRE_MUD.get())
+                .add(ModBlocks.MOSSY_MIRE_MUD.get())
+                .add(ModBlocks.MIRE_MOSS.get());
     }
 }

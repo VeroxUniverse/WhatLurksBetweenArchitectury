@@ -4,22 +4,22 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
-import net.veroxuniverse.what_lurks_between.sanity.ISanityEffect;
+import net.veroxuniverse.what_lurks_between.api.ISanityEffect;
+import net.veroxuniverse.what_lurks_between.config.SanityConfig;
 
 public class DoorCreakEffect implements ISanityEffect {
     @Override
     public float getThreshold() {
-        return 50f;
+        return SanityConfig.INSTANCE.doorCreak.threshold;
     }
 
     @Override
     public void apply(Player player, float currentSanity) {
-
-        if (player.getRandom().nextFloat() < 0.003f) {
+        if (player.getRandom().nextFloat() < SanityConfig.INSTANCE.doorCreak.chance) {
             Vec3 pos = player.position().add(
                     (player.getRandom().nextDouble() - 0.5) * 10,
                     0,
-                    (player.getRandom().nextDouble() - 0.5) *10
+                    (player.getRandom().nextDouble() - 0.5) * 10
             );
 
             player.level().playLocalSound(
@@ -30,9 +30,7 @@ public class DoorCreakEffect implements ISanityEffect {
                     0.5f + player.getRandom().nextFloat() * 0.3f,
                     false
             );
-
         }
-
     }
 
     @Override

@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.veroxuniverse.what_lurks_between.config.SanityConfig;
 
 public class SanityVignetteRenderer {
     private static final ResourceLocation VIGNETTE_TEX = ResourceLocation.withDefaultNamespace("textures/misc/vignette.png");
@@ -16,6 +17,10 @@ public class SanityVignetteRenderer {
         ClientGuiEvent.RENDER_HUD.register((guiGraphics, tickDelta) -> {
             Minecraft mc = Minecraft.getInstance();
             if (mc.player == null || mc.level == null || mc.options.hideGui) return;
+
+            if (!SanityConfig.INSTANCE.enableSanityEffects) {
+                return;
+            }
 
             float realSanity = ClientSanityData.getSanity();
             boolean isCultist = ClientSanityData.isCultist();
