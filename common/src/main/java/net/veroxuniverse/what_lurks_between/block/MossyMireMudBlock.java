@@ -3,17 +3,10 @@ package net.veroxuniverse.what_lurks_between.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.veroxuniverse.what_lurks_between.registry.ModBlocks;
@@ -28,11 +21,6 @@ public class MossyMireMudBlock extends Block {
 
     @Override
     protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        if (context instanceof EntityCollisionContext ecc && ecc.getEntity() instanceof LivingEntity living) {
-            if (living.getItemBySlot(EquipmentSlot.FEET).is(Items.LEATHER_BOOTS)) {
-                return Shapes.block();
-            }
-        }
         return COLLISION_SHAPE;
     }
 

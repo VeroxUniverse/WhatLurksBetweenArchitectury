@@ -9,11 +9,12 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.veroxuniverse.what_lurks_between.WhatLurksBetween;
+import net.veroxuniverse.what_lurks_between.config.SanityConfig;
 import net.veroxuniverse.what_lurks_between.network.SanityNetworking;
-import net.veroxuniverse.what_lurks_between.registry.ModAttributes;
 import net.veroxuniverse.what_lurks_between.registry.ModMobEffects;
 import net.veroxuniverse.what_lurks_between.sanity.SanityData;
 import net.veroxuniverse.what_lurks_between.sanity.SanitySavedData;
+
 import java.util.UUID;
 
 public class SanityAPI {
@@ -79,8 +80,11 @@ public class SanityAPI {
             }
         } catch (Exception ignored) {}
 
-        float corruption = getCorruptionValue(player);
-        modifier *= (1.0f + corruption);
+        if (SanityConfig.INSTANCE.corruptionAffectsSanity) {
+            float corruption = getCorruptionValue(player);
+            float strength = SanityConfig.INSTANCE.corruptionMultiplierStrength / 10.0f;
+            modifier *= (1.0f + (corruption * strength));
+        }
 
         for (ItemStack stack : player.getArmorSlots()) {
             if (!stack.isEmpty() && stack.getItem() instanceof ISanityModifier sanityItem) {

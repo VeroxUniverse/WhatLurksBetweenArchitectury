@@ -22,7 +22,6 @@ import net.veroxuniverse.what_lurks_between.api.ISanityCondition;
 import net.veroxuniverse.what_lurks_between.api.SanityAPI;
 import net.veroxuniverse.what_lurks_between.config.SanityConfig;
 import net.veroxuniverse.what_lurks_between.network.SanityNetworking;
-import net.veroxuniverse.what_lurks_between.registry.ModAttributes;
 import net.veroxuniverse.what_lurks_between.registry.ModMobEffects;
 import net.veroxuniverse.what_lurks_between.util.LightExtinguisher;
 
@@ -60,7 +59,7 @@ public class SanityEventHandler {
                     Holder<Attribute> holder = player.level().registryAccess().registryOrThrow(Registries.ATTRIBUTE).getHolderOrThrow(CORRUPTION_KEY);
                     AttributeInstance corruption = player.getAttribute(holder);
                     if (corruption != null) {
-                        double newValue = Math.min(1.0, corruption.getBaseValue() + 0.05);
+                        double newValue = Math.min(1.0, corruption.getBaseValue() + 0.02);
                         corruption.setBaseValue(newValue);
                         player.sendSystemMessage(Component.translatable("message.what_lurks_between.corruption_increased")
                                 .withStyle(ChatFormatting.DARK_RED, ChatFormatting.ITALIC));

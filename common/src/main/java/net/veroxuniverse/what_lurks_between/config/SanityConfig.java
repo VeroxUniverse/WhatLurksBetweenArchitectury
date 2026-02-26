@@ -15,6 +15,15 @@ public class SanityConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip
     public boolean enableSanityEffects = true;
 
+    @ConfigEntry.Category("default")
+    @ConfigEntry.Gui.Tooltip
+    public boolean corruptionAffectsSanity = true;
+
+    @ConfigEntry.Category("default")
+    @ConfigEntry.Gui.Tooltip
+    @ConfigEntry.BoundedDiscrete(min = 1, max = 20)
+    public int corruptionMultiplierStrength = 5;
+
     @ConfigEntry.Category("light_logic")
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.BoundedDiscrete(min = 0, max = 15)

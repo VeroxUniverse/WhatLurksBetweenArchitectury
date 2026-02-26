@@ -26,6 +26,10 @@
   "text.autoconfig.what_lurks_between.category.default": "General Settings",
   "text.autoconfig.what_lurks_between.option.enableSanityEffects": "Enable Sanity Effects",
   "text.autoconfig.what_lurks_between.option.enableSanityEffects.@Tooltip": "If disabled, sanity will still be calculated and shown on the HUD, but no hallucinations or sounds will occur.",
+  "text.autoconfig.what_lurks_between.option.corruptionAffectsSanity": "Enable Corruption Sanity Multiplier",
+  "text.autoconfig.what_lurks_between.option.corruptionAffectsSanity.@Tooltip": "If enabled, your current corruption level will multiply the speed of sanity loss.",
+  "text.autoconfig.what_lurks_between.option.corruptionMultiplierStrength": "Corruption Multiplier Strength",
+  "text.autoconfig.what_lurks_between.option.corruptionMultiplierStrength.@Tooltip": "Adjust how much corruption impacts sanity. A value of 5 equals 0.5x strength.",
 
   "text.autoconfig.what_lurks_between.category.light_logic": "Sanity Settings",
   "text.autoconfig.what_lurks_between.option.darknessThreshold": "Darkness Threshold",

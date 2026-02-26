@@ -54,9 +54,10 @@ public class ModBlocks {
             ));
 
     public static final RegistrySupplier<Block> ROCKY_MIRE_MUD = registerBlock("rocky_mire_mud",
-            () -> new Block(BlockBehaviour.Properties.of()
+            () -> new RockyMireMudBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.DIRT)
                     .strength(0.5f)
+                    .speedFactor(0.8f)
                     .sound(SoundType.MUD)));
 
     public static final RegistrySupplier<Block> MIRE_ROCK = registerBlock("mire_rock",
