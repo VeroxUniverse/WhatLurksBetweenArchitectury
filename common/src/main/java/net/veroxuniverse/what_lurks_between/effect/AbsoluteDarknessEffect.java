@@ -13,6 +13,5 @@ public class AbsoluteDarknessEffect extends MobEffect {
     public boolean applyEffectTick(LivingEntity entity, int amplifier) {
         return true;
     }
-
-
+    
 }

@@ -8,11 +8,9 @@ import dev.architectury.event.events.common.TickEvent;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.Commands;
-import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 import net.veroxuniverse.what_lurks_between.api.ISanityCondition;
@@ -55,7 +53,7 @@ public class SanityEventHandler {
             if (SanityAPI.getSanity(player) <= 0.1f) {
                 AttributeInstance corruption = player.getAttribute(ModAttributes.CORRUPTION);
                 if (corruption != null) {
-                    double newValue = Math.min(100.0, corruption.getBaseValue() + 5.0);
+                    double newValue = Math.min(1.0, corruption.getBaseValue() + 0.05);
                     corruption.setBaseValue(newValue);
                     player.sendSystemMessage(Component.translatable("message.what_lurks_between.corruption_increased")
                             .withStyle(ChatFormatting.DARK_RED, ChatFormatting.ITALIC));
@@ -83,16 +81,20 @@ public class SanityEventHandler {
             baseCmd.then(Commands.literal("corruption")
                     .then(Commands.literal("set").then(Commands.argument("value", DoubleArgumentType.doubleArg(0, 100)).executes(c -> {
                         ServerPlayer p = c.getSource().getPlayerOrException();
-                        double value = DoubleArgumentType.getDouble(c, "value");
+                        double inputValue = DoubleArgumentType.getDouble(c, "value");
+                        double internalValue = inputValue / 100.0;
+
                         AttributeInstance inst = p.getAttribute(ModAttributes.CORRUPTION);
-                        if (inst != null) inst.setBaseValue(value);
-                        c.getSource().sendSuccess(() -> Component.literal("§dCorruption set to: " + value + "%"), true);
+                        if (inst != null) {
+                            inst.setBaseValue(internalValue);
+                            c.getSource().sendSuccess(() -> Component.literal("§dCorruption set to: " + inputValue + "%"), true);
+                        }
                         return 1;
                     })))
                     .then(Commands.literal("get").executes(c -> {
                         ServerPlayer p = c.getSource().getPlayerOrException();
                         double val = p.getAttributeValue(ModAttributes.CORRUPTION);
-                        c.getSource().sendSuccess(() -> Component.literal("§dCurrent Corruption: " + String.format("%.1f", val) + "%"), false);
+                        c.getSource().sendSuccess(() -> Component.literal("§dCurrent Corruption: " + String.format("%.1f", val * 100.0) + "%"), false);
                         return 1;
                     })));
 
@@ -188,14 +190,12 @@ public class SanityEventHandler {
     private static void handleSanityLogic(Player player) {
         int light = player.level().getMaxLocalRawBrightness(player.blockPosition());
         boolean cultist = SanityAPI.isCultist(player);
-        float modifier = SanityAPI.getSanityModifier(player);
 
-        double corruption = player.getAttributeValue(ModAttributes.CORRUPTION);
-        float corruptionMult = 1.0f + (float)(corruption / 100.0);
+        float modifier = SanityAPI.getSanityModifier(player);
 
         if (light < SanityConfig.INSTANCE.darknessThreshold) {
             if (!SanityConditionManager.isBlocked(player, ISanityCondition.ConditionType.DECREASE)) {
-                SanityAPI.modifySanity(player, SanityConfig.INSTANCE.sanityReduction * modifier * corruptionMult);
+                SanityAPI.modifySanity(player, SanityConfig.INSTANCE.sanityReduction * modifier);
             }
         } else if (light > SanityConfig.INSTANCE.brightnessThreshold) {
             if (!SanityConditionManager.isBlocked(player, ISanityCondition.ConditionType.INCREASE)) {
@@ -204,11 +204,12 @@ public class SanityEventHandler {
         }
 
         if (debugEnabled) {
+            double corruptionDisplay = player.getAttributeValue(ModAttributes.CORRUPTION) * 100.0;
             String modeInfo = cultist ? "§d[Cultist Mode]" : "§b[Human Mode]";
             player.displayClientMessage(
                     Component.literal("§eSanity: §f" + String.format("%.1f", SanityAPI.getSanity(player)) +
-                            " §8| §dCorr: §f" + String.format("%.1f", corruption) + "%" +
-                            " §8| §eLight: §f" + light + " §8| §6Mod: §f" + String.format("%.1f", modifier) + " " + modeInfo),
+                            " §8| §dCorr: §f" + String.format("%.1f", corruptionDisplay) + "%" +
+                            " §8| §eLight: §f" + light + " §8| §6Mod: §f" + String.format("%.2f", modifier) + " " + modeInfo),
                     true
             );
         }

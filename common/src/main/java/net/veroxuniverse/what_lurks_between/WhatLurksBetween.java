@@ -13,14 +13,12 @@ public final class WhatLurksBetween {
     public static void init() {
         AutoConfig.register(SanityConfig.class, JanksonConfigSerializer::new);
         SanityConfig.INSTANCE = AutoConfig.getConfigHolder(SanityConfig.class).getConfig();
-
+        ModMobEffects.register();
+        ModAttributes.register();
         ModBlocks.register();
         ModItems.register();
         ModTabs.register();
-        ModMobEffects.register();
-        ModAttributes.register();
         SanityNetworking.register();
         SanityEventHandler.init();
-
     }
 }

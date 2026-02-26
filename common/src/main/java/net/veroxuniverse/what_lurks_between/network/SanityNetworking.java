@@ -1,6 +1,8 @@
 package net.veroxuniverse.what_lurks_between.network;
 
 import dev.architectury.networking.NetworkManager;
+import dev.architectury.utils.Env;
+import dev.architectury.utils.EnvExecutor;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -26,7 +28,7 @@ public class SanityNetworking {
     }
 
     public static void register() {
-        dev.architectury.utils.EnvExecutor.runInEnv(dev.architectury.utils.Env.SERVER, () -> () -> {
+        EnvExecutor.runInEnv(Env.SERVER, () -> () -> {
             NetworkManager.registerS2CPayloadType(TYPE, CODEC);
         });
     }

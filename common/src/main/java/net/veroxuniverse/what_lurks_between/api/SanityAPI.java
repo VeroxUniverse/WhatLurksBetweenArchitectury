@@ -44,14 +44,25 @@ public class SanityAPI {
         SanityNetworking.syncToClient(player, newData.value());
     }
 
+    public static float getCorruptionValue(Player player) {
+        var attributeInstance = player.getAttribute(ModAttributes.CORRUPTION);
+        if (attributeInstance != null) {
+            return (float) attributeInstance.getValue();
+        }
+        return 0.0f;
+    }
+
     public static float getSanityModifier(Player player) {
         float modifier = 1.0f;
 
-        var attributeInstance = player.getAttribute(ModAttributes.SANITY_RESISTANCE);
-        if (attributeInstance != null) {
-            float resistance = (float) attributeInstance.getValue();
+        var resistanceInstance = player.getAttribute(ModAttributes.SANITY_RESISTANCE);
+        if (resistanceInstance != null) {
+            float resistance = (float) resistanceInstance.getValue();
             modifier *= (1.0f - Math.min(resistance, 1.0f));
         }
+
+        float corruption = getCorruptionValue(player);
+        modifier *= (1.0f + corruption);
 
         for (ItemStack stack : player.getArmorSlots()) {
             if (!stack.isEmpty() && stack.getItem() instanceof ISanityModifier sanityItem) {
