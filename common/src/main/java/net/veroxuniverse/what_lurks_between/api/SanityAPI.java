@@ -1,7 +1,14 @@
 package net.veroxuniverse.what_lurks_between.api;
 
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.veroxuniverse.what_lurks_between.WhatLurksBetween;
 import net.veroxuniverse.what_lurks_between.network.SanityNetworking;
 import net.veroxuniverse.what_lurks_between.registry.ModAttributes;
 import net.veroxuniverse.what_lurks_between.registry.ModMobEffects;
@@ -10,6 +17,12 @@ import net.veroxuniverse.what_lurks_between.sanity.SanitySavedData;
 import java.util.UUID;
 
 public class SanityAPI {
+
+    private static final ResourceKey<Attribute> CORRUPTION_KEY = ResourceKey.create(Registries.ATTRIBUTE,
+            ResourceLocation.fromNamespaceAndPath(WhatLurksBetween.MOD_ID, "corruption"));
+
+    private static final ResourceKey<Attribute> RESISTANCE_KEY = ResourceKey.create(Registries.ATTRIBUTE,
+            ResourceLocation.fromNamespaceAndPath(WhatLurksBetween.MOD_ID, "sanity_resistance"));
 
     public static float getSanity(Player player) {
         if (player.getServer() == null) return 100f;
@@ -45,21 +58,26 @@ public class SanityAPI {
     }
 
     public static float getCorruptionValue(Player player) {
-        var attributeInstance = player.getAttribute(ModAttributes.CORRUPTION);
-        if (attributeInstance != null) {
-            return (float) attributeInstance.getValue();
+        try {
+            Holder<Attribute> holder = player.level().registryAccess().registryOrThrow(Registries.ATTRIBUTE).getHolderOrThrow(CORRUPTION_KEY);
+            AttributeInstance inst = player.getAttribute(holder);
+            return inst != null ? (float) inst.getValue() : 0.0f;
+        } catch (Exception e) {
+            return 0.0f;
         }
-        return 0.0f;
     }
 
     public static float getSanityModifier(Player player) {
         float modifier = 1.0f;
 
-        var resistanceInstance = player.getAttribute(ModAttributes.SANITY_RESISTANCE);
-        if (resistanceInstance != null) {
-            float resistance = (float) resistanceInstance.getValue();
-            modifier *= (1.0f - Math.min(resistance, 1.0f));
-        }
+        try {
+            Holder<Attribute> resHolder = player.level().registryAccess().registryOrThrow(Registries.ATTRIBUTE).getHolderOrThrow(RESISTANCE_KEY);
+            AttributeInstance resistanceInstance = player.getAttribute(resHolder);
+            if (resistanceInstance != null) {
+                float resistance = (float) resistanceInstance.getValue();
+                modifier *= (1.0f - Math.min(resistance, 1.0f));
+            }
+        } catch (Exception ignored) {}
 
         float corruption = getCorruptionValue(player);
         modifier *= (1.0f + corruption);

@@ -12,13 +12,6 @@ import net.veroxuniverse.what_lurks_between.registry.ModAttributes;
 public final class WhatLurksBetweenNeoForge {
     public WhatLurksBetweenNeoForge(IEventBus modEventBus) {
         WhatLurksBetween.init();
-        modEventBus.addListener(this::registerEntityAttrributes);
-    }
-
-    @SubscribeEvent
-    public void registerEntityAttrributes(EntityAttributeModificationEvent event) {
-        event.add(EntityType.PLAYER, ModAttributes.CORRUPTION, 0.0D);
-        event.add(EntityType.PLAYER, ModAttributes.SANITY_RESISTANCE, 0.0D);
     }
 
 }

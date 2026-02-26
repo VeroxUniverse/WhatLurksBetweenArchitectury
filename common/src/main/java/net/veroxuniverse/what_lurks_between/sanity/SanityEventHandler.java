@@ -8,11 +8,16 @@ import dev.architectury.event.events.common.TickEvent;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.Commands;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
+import net.veroxuniverse.what_lurks_between.WhatLurksBetween;
 import net.veroxuniverse.what_lurks_between.api.ISanityCondition;
 import net.veroxuniverse.what_lurks_between.api.SanityAPI;
 import net.veroxuniverse.what_lurks_between.config.SanityConfig;
@@ -25,13 +30,13 @@ public class SanityEventHandler {
 
     private static boolean debugEnabled = false;
 
+    private static final ResourceKey<Attribute> CORRUPTION_KEY = ResourceKey.create(Registries.ATTRIBUTE,
+            ResourceLocation.fromNamespaceAndPath(WhatLurksBetween.MOD_ID, "corruption"));
+
     private static final String[] SLEEP_MESSAGE_KEYS = {
-            "message.what_lurks_between.sleep_1",
-            "message.what_lurks_between.sleep_2",
-            "message.what_lurks_between.sleep_3",
-            "message.what_lurks_between.sleep_4",
-            "message.what_lurks_between.sleep_5",
-            "message.what_lurks_between.sleep_6"
+            "message.what_lurks_between.sleep_1", "message.what_lurks_between.sleep_2",
+            "message.what_lurks_between.sleep_3", "message.what_lurks_between.sleep_4",
+            "message.what_lurks_between.sleep_5", "message.what_lurks_between.sleep_6"
     };
 
     private static final String[] CULTIST_SLEEP_MESSAGE_KEYS = {
@@ -51,13 +56,16 @@ public class SanityEventHandler {
 
         PlayerEvent.PLAYER_RESPAWN.register((player, atCheckpoint, status) -> {
             if (SanityAPI.getSanity(player) <= 0.1f) {
-                AttributeInstance corruption = player.getAttribute(ModAttributes.CORRUPTION);
-                if (corruption != null) {
-                    double newValue = Math.min(1.0, corruption.getBaseValue() + 0.05);
-                    corruption.setBaseValue(newValue);
-                    player.sendSystemMessage(Component.translatable("message.what_lurks_between.corruption_increased")
-                            .withStyle(ChatFormatting.DARK_RED, ChatFormatting.ITALIC));
-                }
+                try {
+                    Holder<Attribute> holder = player.level().registryAccess().registryOrThrow(Registries.ATTRIBUTE).getHolderOrThrow(CORRUPTION_KEY);
+                    AttributeInstance corruption = player.getAttribute(holder);
+                    if (corruption != null) {
+                        double newValue = Math.min(1.0, corruption.getBaseValue() + 0.05);
+                        corruption.setBaseValue(newValue);
+                        player.sendSystemMessage(Component.translatable("message.what_lurks_between.corruption_increased")
+                                .withStyle(ChatFormatting.DARK_RED, ChatFormatting.ITALIC));
+                    }
+                } catch (Exception ignored) {}
             }
         });
 
@@ -83,18 +91,24 @@ public class SanityEventHandler {
                         ServerPlayer p = c.getSource().getPlayerOrException();
                         double inputValue = DoubleArgumentType.getDouble(c, "value");
                         double internalValue = inputValue / 100.0;
-
-                        AttributeInstance inst = p.getAttribute(ModAttributes.CORRUPTION);
-                        if (inst != null) {
-                            inst.setBaseValue(internalValue);
-                            c.getSource().sendSuccess(() -> Component.literal("§dCorruption set to: " + inputValue + "%"), true);
-                        }
+                        try {
+                            Holder<Attribute> holder = p.level().registryAccess().registryOrThrow(Registries.ATTRIBUTE).getHolderOrThrow(CORRUPTION_KEY);
+                            AttributeInstance inst = p.getAttribute(holder);
+                            if (inst != null) {
+                                inst.setBaseValue(internalValue);
+                                c.getSource().sendSuccess(() -> Component.literal("§dCorruption set to: " + inputValue + "%"), true);
+                            }
+                        } catch (Exception ignored) {}
                         return 1;
                     })))
                     .then(Commands.literal("get").executes(c -> {
                         ServerPlayer p = c.getSource().getPlayerOrException();
-                        double val = p.getAttributeValue(ModAttributes.CORRUPTION);
-                        c.getSource().sendSuccess(() -> Component.literal("§dCurrent Corruption: " + String.format("%.1f", val * 100.0) + "%"), false);
+                        try {
+                            Holder<Attribute> holder = p.level().registryAccess().registryOrThrow(Registries.ATTRIBUTE).getHolderOrThrow(CORRUPTION_KEY);
+                            AttributeInstance inst = p.getAttribute(holder);
+                            double val = (inst != null) ? inst.getValue() : 0.0;
+                            c.getSource().sendSuccess(() -> Component.literal("§dCurrent Corruption: " + String.format("%.1f", val * 100.0) + "%"), false);
+                        } catch (Exception ignored) {}
                         return 1;
                     })));
 
@@ -137,41 +151,14 @@ public class SanityEventHandler {
     private static void onPlayerTick(Player player) {
         if (!player.level().isClientSide) {
             if (player.isSleeping() && player.getSleepTimer() == 100) {
-                if (!SanityConditionManager.isBlocked(player, ISanityCondition.ConditionType.RESET)) {
-                    float current = SanityAPI.getSanity(player);
-                    boolean isCultist = SanityAPI.isCultist(player);
-
-                    if (current < 100f) {
-                        float amountToHeal;
-                        if (SanityConfig.INSTANCE.sleepResetsCompletely) {
-                            amountToHeal = 100f - current;
-                        } else {
-                            amountToHeal = Math.min(SanityConfig.INSTANCE.sanityGainFromSleep, 100f - current);
-                        }
-
-                        if (amountToHeal > 0) {
-                            SanityAPI.modifySanity(player, amountToHeal);
-                            String randomKey;
-                            ChatFormatting color;
-
-                            if (isCultist) {
-                                randomKey = CULTIST_SLEEP_MESSAGE_KEYS[player.getRandom().nextInt(CULTIST_SLEEP_MESSAGE_KEYS.length)];
-                                color = ChatFormatting.DARK_PURPLE;
-                            } else {
-                                randomKey = SLEEP_MESSAGE_KEYS[player.getRandom().nextInt(SLEEP_MESSAGE_KEYS.length)];
-                                color = ChatFormatting.GREEN;
-                            }
-                            player.sendSystemMessage(Component.translatable(randomKey).withStyle(color));
-                        }
-                    }
-                }
+                handleSleepResets(player);
             }
 
-            var darknessEffectHolder = player.level().registryAccess()
+            var darknessEffect = player.level().registryAccess()
                     .registryOrThrow(Registries.MOB_EFFECT)
                     .getHolderOrThrow(ModMobEffects.ABSOLUTE_DARKNESS.getKey());
 
-            if (player.hasEffect(darknessEffectHolder)) {
+            if (player.hasEffect(darknessEffect)) {
                 if (player.tickCount % 20 == 0 && SanityConfig.INSTANCE.absoluteDarkness.extinguishLamps) {
                     LightExtinguisher.extinguishAroundPlayer(player, SanityConfig.INSTANCE.absoluteDarkness.radius);
                 }
@@ -184,6 +171,22 @@ public class SanityEventHandler {
 
         if (player.tickCount % 20 == 0 && SanityConfig.INSTANCE.enableSanityEffects) {
             SanityEffectManager.tick(player);
+        }
+    }
+
+    private static void handleSleepResets(Player player) {
+        if (!SanityConditionManager.isBlocked(player, ISanityCondition.ConditionType.RESET)) {
+            float current = SanityAPI.getSanity(player);
+            if (current < 100f) {
+                float amountToHeal = SanityConfig.INSTANCE.sleepResetsCompletely ? (100f - current) : Math.min(SanityConfig.INSTANCE.sanityGainFromSleep, 100f - current);
+                if (amountToHeal > 0) {
+                    SanityAPI.modifySanity(player, amountToHeal);
+                    boolean isCultist = SanityAPI.isCultist(player);
+                    String[] pool = isCultist ? CULTIST_SLEEP_MESSAGE_KEYS : SLEEP_MESSAGE_KEYS;
+                    player.sendSystemMessage(Component.translatable(pool[player.getRandom().nextInt(pool.length)])
+                            .withStyle(isCultist ? ChatFormatting.DARK_PURPLE : ChatFormatting.GREEN));
+                }
+            }
         }
     }
 
@@ -204,7 +207,7 @@ public class SanityEventHandler {
         }
 
         if (debugEnabled) {
-            double corruptionDisplay = player.getAttributeValue(ModAttributes.CORRUPTION) * 100.0;
+            double corruptionDisplay = SanityAPI.getCorruptionValue(player) * 100.0;
             String modeInfo = cultist ? "§d[Cultist Mode]" : "§b[Human Mode]";
             player.displayClientMessage(
                     Component.literal("§eSanity: §f" + String.format("%.1f", SanityAPI.getSanity(player)) +

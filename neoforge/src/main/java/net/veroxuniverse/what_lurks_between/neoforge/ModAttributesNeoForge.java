@@ -23,6 +23,13 @@ public class ModAttributesNeoForge {
                         ResourceLocation.fromNamespaceAndPath(WhatLurksBetween.MOD_ID, "sanity_resistance")
                 ));
 
+        Holder<Attribute> corruption = BuiltInRegistries.ATTRIBUTE
+                .getHolderOrThrow(ResourceKey.create(
+                        Registries.ATTRIBUTE,
+                        ResourceLocation.fromNamespaceAndPath(WhatLurksBetween.MOD_ID, "corruption")
+                ));
+
         event.add(EntityType.PLAYER, sanityResistance);
+        event.add(EntityType.PLAYER, corruption);
     }
 }
