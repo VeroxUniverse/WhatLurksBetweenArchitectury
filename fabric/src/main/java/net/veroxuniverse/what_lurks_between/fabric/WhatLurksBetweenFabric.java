@@ -8,6 +8,5 @@ public final class WhatLurksBetweenFabric implements ModInitializer {
     @Override
     public void onInitialize() {
         WhatLurksBetween.init();
-        ModAttributesFabric.init();
     }
 }

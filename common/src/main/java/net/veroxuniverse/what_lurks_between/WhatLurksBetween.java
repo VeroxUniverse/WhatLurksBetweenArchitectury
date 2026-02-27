@@ -14,7 +14,7 @@ public final class WhatLurksBetween {
         AutoConfig.register(SanityConfig.class, JanksonConfigSerializer::new);
         SanityConfig.INSTANCE = AutoConfig.getConfigHolder(SanityConfig.class).getConfig();
         ModMobEffects.register();
-        ModAttributes.register();
+        //ModAttributes.register();
         ModBlocks.register();
         ModItems.register();
         ModTabs.register();

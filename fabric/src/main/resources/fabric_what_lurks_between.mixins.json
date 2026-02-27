@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "net.veroxuniverse.what_lurks_between.fabric.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "minVersion": "0.8",
+  "client": [
+  ],
+  "mixins": [
+    "PlayerAttributeMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

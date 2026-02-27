@@ -25,7 +25,8 @@
     ]
   },
   "mixins": [
-    "what_lurks_between.mixins.json"
+    "what_lurks_between.mixins.json",
+    "fabric_what_lurks_between.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.18.4",
