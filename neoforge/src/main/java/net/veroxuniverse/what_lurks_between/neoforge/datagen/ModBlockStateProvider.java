@@ -18,38 +18,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        ModelFile torch = models().getBuilder("unlit_torch")
-                .parent(new ModelFile.UncheckedModelFile(mcLoc("block/torch")))
-                .texture("torch", modLoc("block/unlit_torch"));
-        simpleBlock(ModBlocks.UNLIT_TORCH.get(), torch);
-
-        ModelFile wallTorch = models().getBuilder("unlit_wall_torch")
-                .parent(new ModelFile.UncheckedModelFile(mcLoc("block/wall_torch")))
-                .texture("torch", modLoc("block/unlit_torch"));
-
-        getVariantBuilder(ModBlocks.UNLIT_WALL_TORCH.get()).forAllStates(state ->
-                ConfiguredModel.builder()
-                        .modelFile(wallTorch)
-                        .rotationY(((int) state.getValue(WallTorchBlock.FACING).toYRot() + 90) % 360)
-                        .build()
-        );
-
-        ModelFile lantern = models().getBuilder("unlit_lantern")
-                .parent(new ModelFile.UncheckedModelFile(mcLoc("block/template_lantern")))
-                .texture("lantern", modLoc("block/unlit_lantern"))
-                .texture("particle", modLoc("block/unlit_lantern"));
-
-        ModelFile hangingLantern = models().getBuilder("unlit_hanging_lantern")
-                .parent(new ModelFile.UncheckedModelFile(mcLoc("block/template_hanging_lantern")))
-                .texture("lantern", modLoc("block/unlit_lantern"))
-                .texture("particle", modLoc("block/unlit_lantern"));
-
-        getVariantBuilder(ModBlocks.UNLIT_LANTERN.get()).forAllStates(state -> {
-            boolean hanging = state.getValue(LanternBlock.HANGING);
-            return ConfiguredModel.builder()
-                    .modelFile(hanging ? hangingLantern : lantern)
-                    .build();
-        });
 
         simpleBlockWithItem(ModBlocks.MIRE_MUD.get(), cubeAll(ModBlocks.MIRE_MUD.get()));
         simpleBlockWithItem(ModBlocks.MIRE_MOSS.get(), cubeAll(ModBlocks.MIRE_MOSS.get()));

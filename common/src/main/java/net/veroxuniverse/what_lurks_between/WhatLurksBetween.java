@@ -2,23 +2,22 @@ package net.veroxuniverse.what_lurks_between;
 
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
-import net.veroxuniverse.what_lurks_between.config.SanityConfig;
-import net.veroxuniverse.what_lurks_between.network.SanityNetworking;
-import net.veroxuniverse.what_lurks_between.registry.*;
-import net.veroxuniverse.what_lurks_between.sanity.SanityEventHandler;
+import net.veroxuniverse.what_lurks_between.config.ModConfig;
+import net.veroxuniverse.what_lurks_between.registry.ModBlocks;
+import net.veroxuniverse.what_lurks_between.registry.ModItems;
+import net.veroxuniverse.what_lurks_between.registry.ModMobEffects;
+import net.veroxuniverse.what_lurks_between.registry.ModTabs;
 
 public final class WhatLurksBetween {
     public static final String MOD_ID = "what_lurks_between";
 
     public static void init() {
-        AutoConfig.register(SanityConfig.class, JanksonConfigSerializer::new);
-        SanityConfig.INSTANCE = AutoConfig.getConfigHolder(SanityConfig.class).getConfig();
+        AutoConfig.register(ModConfig.class, JanksonConfigSerializer::new);
+        ModConfig.INSTANCE = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
         ModMobEffects.register();
         //ModAttributes.register();
         ModBlocks.register();
         ModItems.register();
         ModTabs.register();
-        SanityNetworking.register();
-        SanityEventHandler.init();
     }
 }

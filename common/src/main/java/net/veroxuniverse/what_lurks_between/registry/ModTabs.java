@@ -18,7 +18,7 @@ public class ModTabs {
             "items_tab",
             () -> CreativeTabRegistry.create(
                     Component.translatable("itemGroup." + WhatLurksBetween.MOD_ID + ".items"),
-                    () -> new ItemStack(ModItems.UNLIT_TORCH.get())
+                    () -> new ItemStack(ModItems.VOID_PEARL.get())
             )
     );
 
