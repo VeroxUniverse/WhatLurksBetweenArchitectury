@@ -20,6 +20,13 @@ public class ModBlockTagProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+        tag(ModTags.LIGHT_SOURCES)
+                .add(Blocks.TORCH)
+                .add(Blocks.WALL_TORCH)
+                .add(Blocks.LANTERN)
+                .add(Blocks.CAMPFIRE)
+                .add(Blocks.FIRE)
+                .add(Blocks.REDSTONE_LAMP);
 
         tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .add(ModBlocks.WET_MIRE_MUD.get())
@@ -31,7 +38,14 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.MIRE_MOSS.get());
 
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(ModBlocks.MIRE_ROCK.get());
+                .add(ModBlocks.MIRE_ROCK.get())
+                .add(ModBlocks.UNLIT_LANTERN.get());
+
+        tag(BlockTags.NEEDS_STONE_TOOL)
+                .add(ModBlocks.UNLIT_LANTERN.get());
+
+        tag(BlockTags.WALL_POST_OVERRIDE)
+                .add(ModBlocks.UNLIT_TORCH.get());
 
         this.tag(BlockTags.PREVENT_MOB_SPAWNING_INSIDE)
                 .add(ModBlocks.WET_MIRE_MUD.get());

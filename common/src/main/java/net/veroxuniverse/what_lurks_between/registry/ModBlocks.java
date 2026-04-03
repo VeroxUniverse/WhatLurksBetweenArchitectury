@@ -67,6 +67,17 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.STONE)));
 
+    public static final RegistrySupplier<Block> UNLIT_LANTERN = registerBlockWithCustomTab("unlit_lantern",
+            () -> new UnlitLanternBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LANTERN).lightLevel(state -> 0)), ModTabs.ITEMS_TAB);
+
+    public static final RegistrySupplier<Block> UNLIT_TORCH = registerBlockWithoutItem("unlit_torch",
+            () -> new UnlitTorchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.TORCH)
+                    .lightLevel(state -> 0), ParticleTypes.SMOKE));
+
+    public static final RegistrySupplier<Block> UNLIT_WALL_TORCH = registerBlockWithoutItem("unlit_wall_torch",
+            () -> new UnlitWallTorchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WALL_TORCH)
+                    .lightLevel(state -> 0), ParticleTypes.SMOKE));
+
     private static <T extends Block> RegistrySupplier<T> registerBlock(String name, Supplier<T> block) {
         return registerBlockWithCustomTab(name, block, ModTabs.BLOCKS_TAB);
     }

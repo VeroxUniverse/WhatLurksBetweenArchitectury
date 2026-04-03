@@ -9,7 +9,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.veroxuniverse.what_lurks_between.WhatLurksBetween;
 import net.veroxuniverse.what_lurks_between.client.WhatLurksBetweenClient;
-import net.veroxuniverse.what_lurks_between.config.ModConfig;
+import net.veroxuniverse.what_lurks_between.config.SanityConfig;
 
 @EventBusSubscriber(modid = WhatLurksBetween.MOD_ID, value = Dist.CLIENT)
 public class WhatLurksBetweenNeoForgeClient {
@@ -21,7 +21,7 @@ public class WhatLurksBetweenNeoForgeClient {
         ModLoadingContext.get()
                 .registerExtensionPoint(
                         IConfigScreenFactory.class,
-                        () -> (modContainer, screen) -> AutoConfig.getConfigScreen(ModConfig.class, screen).get()
+                        () -> (modContainer, screen) -> AutoConfig.getConfigScreen(SanityConfig.class, screen).get()
                 );
     }
 }

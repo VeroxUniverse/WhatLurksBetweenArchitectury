@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "hanging=false,waterlogged=false": {
+      "model": "what_lurks_between:block/unlit_lantern"
+    },
+    "hanging=false,waterlogged=true": {
+      "model": "what_lurks_between:block/unlit_lantern"
+    },
+    "hanging=true,waterlogged=false": {
+      "model": "what_lurks_between:block/unlit_hanging_lantern"
+    },
+    "hanging=true,waterlogged=true": {
+      "model": "what_lurks_between:block/unlit_hanging_lantern"
+    }
+  }
+}

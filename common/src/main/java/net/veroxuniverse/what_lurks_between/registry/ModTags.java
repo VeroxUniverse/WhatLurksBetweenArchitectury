@@ -8,6 +8,11 @@ import net.veroxuniverse.what_lurks_between.WhatLurksBetween;
 
 public class ModTags {
 
+    public static final TagKey<Block> LIGHT_SOURCES = TagKey.create(
+            Registries.BLOCK,
+            ResourceLocation.fromNamespaceAndPath(WhatLurksBetween.MOD_ID, "light_sources")
+    );
+
     public static final TagKey<Block> MIRE_PLANTABLE_ON = TagKey.create(
             Registries.BLOCK,
             ResourceLocation.fromNamespaceAndPath(WhatLurksBetween.MOD_ID, "mire_plantable_on")
