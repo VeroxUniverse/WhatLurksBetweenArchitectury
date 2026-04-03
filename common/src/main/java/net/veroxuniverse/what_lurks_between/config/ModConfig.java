@@ -11,4 +11,5 @@ public class ModConfig implements ConfigData {
     @ConfigEntry.Gui.Excluded
     public static ModConfig INSTANCE;
 
+
 }
