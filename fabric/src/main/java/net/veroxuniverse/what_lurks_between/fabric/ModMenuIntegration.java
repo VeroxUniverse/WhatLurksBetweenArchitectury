@@ -4,7 +4,7 @@ import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.gui.screens.Screen;
-import net.veroxuniverse.what_lurks_between.config.SanityConfig;
+import net.veroxuniverse.what_lurks_between.config.ModConfig;
 
 public class ModMenuIntegration implements ModMenuApi {
 
@@ -13,7 +13,7 @@ public class ModMenuIntegration implements ModMenuApi {
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
         return (ConfigScreenFactory) parent -> {
             Screen parentScreen = parent;
-            return AutoConfig.getConfigScreen(SanityConfig.class, parentScreen).get();
+            return AutoConfig.getConfigScreen(ModConfig.class, parentScreen).get();
         };
     }
 }

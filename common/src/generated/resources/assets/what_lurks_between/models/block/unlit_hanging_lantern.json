@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/template_hanging_lantern",
-  "textures": {
-    "lantern": "what_lurks_between:block/unlit_lantern",
-    "particle": "what_lurks_between:block/unlit_lantern"
-  }
-}

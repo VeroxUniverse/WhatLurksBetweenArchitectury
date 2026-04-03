@@ -12,13 +12,18 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        withExistingParent("unlit_torch", mcLoc("item/generated"))
-                .texture("layer0", modLoc("block/unlit_torch"));
+        simpleItem("void_pearl");
+        simpleItem("wet_mire_mud_bucket");
 
-        withExistingParent("unlit_lantern", mcLoc("item/generated"))
-                .texture("layer0", modLoc("item/unlit_lantern"));
+    }
 
-        withExistingParent("wet_mire_mud_bucket", mcLoc("item/generated"))
-                .texture("layer0", modLoc("item/wet_mire_mud_bucket"));
+    private void simpleItem(String name) {
+        withExistingParent(name, mcLoc("item/generated"))
+                .texture("layer0", modLoc("item/" + name));
+    }
+
+    private void simpleBlockItem(String name, String texturePath) {
+        withExistingParent(name, mcLoc("item/generated"))
+                .texture("layer0", modLoc(texturePath));
     }
 }

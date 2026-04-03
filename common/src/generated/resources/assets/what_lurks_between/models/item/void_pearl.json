@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "what_lurks_between:block/unlit_torch"
+    "layer0": "what_lurks_between:item/void_pearl"
   }
 }

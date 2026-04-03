@@ -11,7 +11,7 @@ import net.veroxuniverse.what_lurks_between.registry.ModAttributes;
 @Mod(WhatLurksBetween.MOD_ID)
 public final class WhatLurksBetweenNeoForge {
     public WhatLurksBetweenNeoForge(IEventBus modEventBus) {
-        ModAttributes.register();
+        //ModAttributes.register();
         WhatLurksBetween.init();
     }
 

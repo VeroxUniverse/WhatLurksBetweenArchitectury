@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "what_lurks_between:item/unlit_lantern"
-  }
-}

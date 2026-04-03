@@ -1,80 +1,4 @@
 {
-  "message.what_lurks_between.sleep_1": "The sleep has calmed your mind.",
-  "message.what_lurks_between.sleep_2": "You feel rested and secure.",
-  "message.what_lurks_between.sleep_3": "The morning light brings some comfort.",
-  "message.what_lurks_between.sleep_4": "The nightmares fade... for now.",
-  "message.what_lurks_between.sleep_5": "You feel a bit more like yourself again.",
-  "message.what_lurks_between.sleep_6": "67",
-
-  "message.what_lurks_between.sleep_cultist_1": "The abyss spoke to you in your dreams.",
-  "message.what_lurks_between.sleep_cultist_2": "You feel the darkness pulse within you.",
-  "message.what_lurks_between.sleep_cultist_3": "The shadows welcomed your rest.",
-
-  "message.what_lurks_between.corruption_increased": "Your soul has been further corrupted by the absolute darkness...",
-
-  "gui.what_lurks_between.sanity_label": "Sanity",
-
-  "attribute.what_lurks_between.sanity_resistance": "Sanity Resistance",
-  "attribute.what_lurks_between.corruption": "Corruption",
-
-  "effect.what_lurks_between.sanity_protection": "Mental Clarity",
-
-  "text.autoconfig.what_lurks_between.option.corruption": "Corruption Level",
-
-  "text.autoconfig.what_lurks_between.title": "What Lurks Between Settings",
-
-  "text.autoconfig.what_lurks_between.category.default": "General Settings",
-  "text.autoconfig.what_lurks_between.option.enableSanityEffects": "Enable Sanity Effects",
-  "text.autoconfig.what_lurks_between.option.enableSanityEffects.@Tooltip": "If disabled, sanity will still be calculated and shown on the HUD, but no hallucinations or sounds will occur.",
-  "text.autoconfig.what_lurks_between.option.corruptionAffectsSanity": "Enable Corruption Sanity Multiplier",
-  "text.autoconfig.what_lurks_between.option.corruptionAffectsSanity.@Tooltip": "If enabled, your current corruption level will multiply the speed of sanity loss.",
-  "text.autoconfig.what_lurks_between.option.corruptionMultiplierStrength": "Corruption Multiplier Strength",
-  "text.autoconfig.what_lurks_between.option.corruptionMultiplierStrength.@Tooltip": "Adjust how much corruption impacts sanity. A value of 5 equals 0.5x strength.",
-
-  "text.autoconfig.what_lurks_between.category.light_logic": "Sanity Settings",
-  "text.autoconfig.what_lurks_between.option.darknessThreshold": "Darkness Threshold",
-  "text.autoconfig.what_lurks_between.option.darknessThreshold.@Tooltip": "Light level below which sanity starts to drain (0-15).",
-  "text.autoconfig.what_lurks_between.option.brightnessThreshold": "Brightness Threshold",
-  "text.autoconfig.what_lurks_between.option.brightnessThreshold.@Tooltip": "Light level above which sanity starts to recover.",
-  "text.autoconfig.what_lurks_between.option.sanityReduction": "Sanity Drain Speed",
-  "text.autoconfig.what_lurks_between.option.sanityReduction.@Tooltip": "How fast sanity drops in the dark.",
-  "text.autoconfig.what_lurks_between.option.sanityGain": "Sanity Recovery Speed",
-  "text.autoconfig.what_lurks_between.option.sanityGain.@Tooltip": "How fast sanity recovers in the light.",
-
-  "text.autoconfig.what_lurks_between.category.sleep": "Sleep Settings",
-  "text.autoconfig.what_lurks_between.option.sleepResetsCompletely": "Full Sleep Reset",
-  "text.autoconfig.what_lurks_between.option.sleepResetsCompletely.@Tooltip": "If enabled, sleeping will set sanity back to 100%.",
-  "text.autoconfig.what_lurks_between.option.sanityGainFromSleep": "Sanity Gain on Wake-up",
-  "text.autoconfig.what_lurks_between.option.sanityGainFromSleep.@Tooltip": "Fixed amount of sanity restored after sleeping (if not full reset).",
-
-  "text.autoconfig.what_lurks_between.category.effects": "Effect Settings",
-  "text.autoconfig.what_lurks_between.option.absoluteDarkness": "Effect: Absolute Darkness",
-  "text.autoconfig.what_lurks_between.option.absoluteDarkness.extinguishLamps": "Extinguish Lights",
-  "text.autoconfig.what_lurks_between.option.absoluteDarkness.threshold": "Sanity Threshold",
-  "text.autoconfig.what_lurks_between.option.absoluteDarkness.radius": "Radius",
-  "text.autoconfig.what_lurks_between.option.whispering": "Effect: Whispering",
-  "text.autoconfig.what_lurks_between.option.footsteps": "Effect: Footsteps",
-  "text.autoconfig.what_lurks_between.option.doorCreak": "Effect: Door Creaks",
-  "text.autoconfig.what_lurks_between.option.fakeCreeper": "Effect: Fake Creeper",
-  "text.autoconfig.what_lurks_between.option.heartbeat": "Effect: Heartbeat",
-  "text.autoconfig.what_lurks_between.option.whispering.enabled": "Enabled",
-  "text.autoconfig.what_lurks_between.option.whispering.chance": "Trigger Chance",
-  "text.autoconfig.what_lurks_between.option.whispering.threshold": "Sanity Threshold",
-  "text.autoconfig.what_lurks_between.option.footsteps.enabled": "Enabled",
-  "text.autoconfig.what_lurks_between.option.footsteps.chance": "Trigger Chance",
-  "text.autoconfig.what_lurks_between.option.footsteps.threshold": "Sanity Threshold",
-  "text.autoconfig.what_lurks_between.option.doorCreak.enabled": "Enabled",
-  "text.autoconfig.what_lurks_between.option.doorCreak.chance": "Trigger Chance",
-  "text.autoconfig.what_lurks_between.option.doorCreak.threshold": "Sanity Threshold",
-  "text.autoconfig.what_lurks_between.option.fakeCreeper.enabled": "Enabled",
-  "text.autoconfig.what_lurks_between.option.fakeCreeper.chance": "Trigger Chance",
-  "text.autoconfig.what_lurks_between.option.fakeCreeper.threshold": "Sanity Threshold",
-  "text.autoconfig.what_lurks_between.option.heartbeat.enabled": "Enabled",
-  "text.autoconfig.what_lurks_between.option.heartbeat.threshold": "Sanity Threshold",
-
-  "block.what_lurks_between.unlit_torch": "Unlit Torch",
-  "block.what_lurks_between.unlit_wall_torch": "Unlit Wall Torch",
-  "block.what_lurks_between.unlit_lantern": "Unlit Lantern",
   "block.what_lurks_between.mire_mud": "Mire Mud",
   "block.what_lurks_between.mire_moss": "Mire Moss",
   "block.what_lurks_between.mossy_mire_mud": "Mossy Mire Mud",
@@ -83,12 +7,11 @@
   "block.what_lurks_between.wet_mire_mud": "Wet Mire Mud",
 
   "item.what_lurks_between.wet_mire_mud_bucket": "Wet Mire Mud Bucket",
-  "item.what_lurks_between.unlit_torch": "Unlit Torch",
-  "item.what_lurks_between.unlit_lantern": "Unlit Lantern",
-
-  "effect.what_lurks_between.absolute_darkness": "Absolute Darkness",
+  "item.what_lurks_between.void_pearl": "Void Pearl",
 
   "itemGroup.what_lurks_between.items": "What Lurks Between: Items",
   "itemGroup.what_lurks_between.blocks": "What Lurks Between: Blocks",
-  "itemGroup.what_lurks_between.misc": "What Lurks Between: Miscellaneous"
+  "itemGroup.what_lurks_between.misc": "What Lurks Between: Miscellaneous",
+
+  "text.autoconfig.what_lurks_between.title": "What Lurks Between Settings"
 }
