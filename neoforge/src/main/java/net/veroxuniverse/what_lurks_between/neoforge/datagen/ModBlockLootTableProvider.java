@@ -17,6 +17,10 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
+        this.add(ModBlocks.UNLIT_TORCH.get(), block -> this.createSingleItemTable(ModBlocks.UNLIT_TORCH.get()));
+        this.add(ModBlocks.UNLIT_WALL_TORCH.get(), block -> this.createSingleItemTable(ModBlocks.UNLIT_TORCH.get()));
+
+        this.add(ModBlocks.UNLIT_LANTERN.get(), block -> this.createSingleItemTable(ModBlocks.UNLIT_LANTERN.get()));
 
         dropSelf(ModBlocks.MIRE_MUD.get());
         dropSelf(ModBlocks.MIRE_MOSS.get());

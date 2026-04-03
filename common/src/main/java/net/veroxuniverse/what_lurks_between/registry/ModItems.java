@@ -16,8 +16,13 @@ public class ModItems {
             () -> new WetMireMudBucketItem(ModBlocks.WET_MIRE_MUD.get(),
                     new Item.Properties().stacksTo(1).arch$tab(ModTabs.ITEMS_TAB)));
 
-    public static final RegistrySupplier<Item> VOID_PEARL = ITEMS.register("void_pearl",
-            () -> new Item(new Item.Properties().arch$tab(ModTabs.ITEMS_TAB)));
+    public static final RegistrySupplier<Item> UNLIT_TORCH = ITEMS.register("unlit_torch",
+            () -> new StandingAndWallBlockItem(
+                    ModBlocks.UNLIT_TORCH.get(),
+                    ModBlocks.UNLIT_WALL_TORCH.get(),
+                    new Item.Properties().arch$tab(ModTabs.ITEMS_TAB),
+                    Direction.DOWN
+            ));
 
     public static void register() {
         ITEMS.register();
