@@ -15,6 +15,16 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem("void_pearl");
         simpleItem("wet_mire_mud_bucket");
 
+        simpleItem("cultist_robe_helmet");
+        simpleItem("cultist_robe_chestplate");
+        simpleItem("cultist_robe_leggings");
+        simpleItem("cultist_robe_boots");
+
+        simpleItem("diving_gear_helmet");
+        simpleItem("diving_gear_chestplate");
+        simpleItem("diving_gear_leggings");
+        simpleItem("diving_gear_boots");
+
     }
 
     private void simpleItem(String name) {

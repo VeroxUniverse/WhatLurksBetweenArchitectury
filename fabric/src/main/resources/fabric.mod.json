@@ -34,8 +34,9 @@
     "java": ">=21",
     "architectury": ">=13.0.8",
     "fabric-api": "*",
-    "geckolib": ">=4.5.3",
-    "cloth-config2": "*"
+    "azurelib": ">=3.1.4",
+    "cloth-config2": "*",
+    "veroxlib": ">=0.0.1"
   },
   "suggests": {
     "modmenu": "*"

@@ -35,10 +35,17 @@ ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies.what_lurks_between]]
-modId="geckolib"
+modId="azurelib"
 type="required"
-versionRange="[4.5.3,)"
+versionRange="[3.1.4,)"
 ordering="AFTER"
+side="BOTH"
+
+[[dependencies.what_lurks_between]]
+modId="veroxlib"
+type="required"
+versionRange="[0.0.1,)"
+ordering="NONE"
 side="BOTH"
 
 [[dependencies.what_lurks_between]]

@@ -51,9 +51,11 @@ dependencies {
 
     modApi "me.shedaniel.cloth:cloth-config-neoforge:${rootProject.cloth_config_version}"
 
-    modImplementation "software.bernie.geckolib:geckolib-neoforge-${rootProject.geckolib_version}"
+    modImplementation "mod.azure.azurelib:azurelib-neo-${rootProject.azurelib_version}"
     common(project(path: ':common', configuration: 'namedElements')) { transitive false }
     shadowBundle project(path: ':common', configuration: 'transformProductionNeoForge')
+
+    modLocalRuntime "curse.maven:veroxlib-1502883:7864979"
 }
 
 processResources {
