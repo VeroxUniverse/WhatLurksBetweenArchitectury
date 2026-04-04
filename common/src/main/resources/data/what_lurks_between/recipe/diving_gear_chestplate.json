@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": { "item": "minecraft:iron_ingot" },
+    "G": { "item": "minecraft:leather" }
+  },
+  "pattern": [
+    "C C",
+    "CGC",
+    "CGC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "what_lurks_between:diving_gear_chestplate"
+  }
+}

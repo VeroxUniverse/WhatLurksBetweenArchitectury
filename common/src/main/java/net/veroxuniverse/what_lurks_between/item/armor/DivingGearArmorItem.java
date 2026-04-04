@@ -20,7 +20,12 @@ public class DivingGearArmorItem extends ArmorItem implements ISanityModifier {
 
     @Override
     public float getSanityResistance(ItemStack itemStack) {
-        return 0.9F;
+        return 0.025F;
+    }
+
+    @Override
+    public float getSanityRegen(ItemStack stack) {
+        return 0.025F;
     }
 
     @Override
@@ -32,21 +37,34 @@ public class DivingGearArmorItem extends ArmorItem implements ISanityModifier {
             builder.add(entry.attribute(), entry.modifier(), entry.slot());
         });
 
-        double protectionValue = 1.0 - (double)getSanityResistance(ItemStack.EMPTY);
+        EquipmentSlotGroup slotGroup = EquipmentSlotGroup.bySlot(this.type.getSlot());
 
+        double protectionValue = (double)getSanityResistance(ItemStack.EMPTY);
         if (protectionValue != 0) {
             builder.add(
                     ModAttributes.SANITY_RESISTANCE,
                     new AttributeModifier(
-                            ResourceLocation.fromNamespaceAndPath(VeroxLib.MOD_ID, "sanity_resistance"),
+                            ResourceLocation.fromNamespaceAndPath(VeroxLib.MOD_ID, "sanity_protection"),
                             protectionValue,
                             AttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     ),
-                    EquipmentSlotGroup.bySlot(this.type.getSlot())
+                    slotGroup
+            );
+        }
+
+        double regenValue = (double)getSanityRegen(ItemStack.EMPTY);
+        if (regenValue != 0) {
+            builder.add(
+                    ModAttributes.SANITY_REGEN,
+                    new AttributeModifier(
+                            ResourceLocation.fromNamespaceAndPath(VeroxLib.MOD_ID, "sanity_regeneration"),
+                            regenValue,
+                            AttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                    ),
+                    slotGroup
             );
         }
 
         return builder.build();
     }
-
 }

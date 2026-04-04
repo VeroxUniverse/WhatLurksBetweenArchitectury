@@ -55,7 +55,7 @@ dependencies {
     common(project(path: ':common', configuration: 'namedElements')) { transitive false }
     shadowBundle project(path: ':common', configuration: 'transformProductionNeoForge')
 
-    modLocalRuntime "curse.maven:veroxlib-1502883:7864979"
+    modLocalRuntime "curse.maven:veroxlib-1502883:7875686"
 }
 
 processResources {

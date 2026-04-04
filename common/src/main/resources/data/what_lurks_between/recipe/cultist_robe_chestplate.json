@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "F": { "item": "minecraft:leather" },
+    "W": { "item": "minecraft:yellow_wool" }
+  },
+  "pattern": [
+    "W W",
+    "FFF",
+    "FFF"
+  ],
+  "result": {
+    "count": 1,
+    "id": "what_lurks_between:cultist_robe_chestplate"
+  }
+}

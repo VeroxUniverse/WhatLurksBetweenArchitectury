@@ -40,7 +40,7 @@ dependencies {
     modCompileOnly "com.terraformersmc:modmenu:11.0.1"
     modLocalRuntime "com.terraformersmc:modmenu:11.0.1"
 
-    modLocalRuntime "curse.maven:veroxlib-1502883:7864975"
+    modLocalRuntime "curse.maven:veroxlib-1502883:7875690"
 }
 
 processResources {

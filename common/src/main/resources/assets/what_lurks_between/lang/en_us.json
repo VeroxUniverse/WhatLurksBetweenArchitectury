@@ -8,6 +8,14 @@
 
   "item.what_lurks_between.wet_mire_mud_bucket": "Wet Mire Mud Bucket",
   "item.what_lurks_between.void_pearl": "Void Pearl",
+  "item.what_lurks_between.cultist_robe_helmet": "Cultist Hood",
+  "item.what_lurks_between.cultist_robe_chestplate": "Cultist Robe",
+  "item.what_lurks_between.cultist_robe_leggings": "Cultist Trousers",
+  "item.what_lurks_between.cultist_robe_boots": "Cultist Sandals",
+  "item.what_lurks_between.diving_gear_helmet": "Diving Helmet",
+  "item.what_lurks_between.diving_gear_chestplate": "Diving Suit",
+  "item.what_lurks_between.diving_gear_leggings": "Diving Leggings",
+  "item.what_lurks_between.diving_gear_boots": "Diving Boots",
 
   "itemGroup.what_lurks_between.items": "What Lurks Between: Items",
   "itemGroup.what_lurks_between.blocks": "What Lurks Between: Blocks",
