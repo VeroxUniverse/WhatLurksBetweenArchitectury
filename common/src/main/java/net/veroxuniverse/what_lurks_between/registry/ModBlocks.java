@@ -144,7 +144,9 @@ public class ModBlocks {
                     .mapColor(MapColor.PLANT)
                     .noOcclusion()
                     .isSuffocating((state, level, pos) -> false)
-                    .isViewBlocking((state, level, pos) -> false)));
+                    .isViewBlocking((state, level, pos) -> false)
+                    .randomTicks()
+            ));
 
     public static final RegistrySupplier<Block> MIREWOOD_TRAPDOOR = registerBlock("mirewood_trapdoor",
             () -> new TrapDoorBlock(BlockSetType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR)
