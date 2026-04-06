@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "what_lurks_between:block/mirewood_slab"
+    },
+    "type=double": {
+      "model": "what_lurks_between:block/mirewood_planks"
+    },
+    "type=top": {
+      "model": "what_lurks_between:block/mirewood_slab_top"
+    }
+  }
+}

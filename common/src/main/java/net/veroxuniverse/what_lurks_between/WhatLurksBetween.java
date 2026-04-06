@@ -1,15 +1,23 @@
 package net.veroxuniverse.what_lurks_between;
 
+import com.google.common.collect.ImmutableMap;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import mod.azure.azurelib.common.animation.cache.AzIdentityRegistry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.level.block.Block;
+import net.veroxuniverse.veroxlib.sanity.SanityConditionManager;
 import net.veroxuniverse.what_lurks_between.client.WhatLurksBetweenClient;
 import net.veroxuniverse.what_lurks_between.config.ModConfig;
 import net.veroxuniverse.what_lurks_between.registry.ModBlocks;
 import net.veroxuniverse.what_lurks_between.registry.ModItems;
 import net.veroxuniverse.what_lurks_between.registry.ModMobEffects;
 import net.veroxuniverse.what_lurks_between.registry.ModTabs;
+import net.veroxuniverse.what_lurks_between.util.sanity.BiomeSanityProtectionCondition;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public final class WhatLurksBetween {
     public static final String MOD_ID = "what_lurks_between";
@@ -22,6 +30,7 @@ public final class WhatLurksBetween {
         ModBlocks.register();
         ModItems.register();
         ModTabs.register();
+        SanityConditionManager.registerCondition(new BiomeSanityProtectionCondition());
     }
 
     public static void initAzIdentityRegistry() {

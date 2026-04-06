@@ -4,10 +4,7 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.StandingAndWallBlockItem;
+import net.minecraft.world.item.*;
 import net.veroxuniverse.what_lurks_between.WhatLurksBetween;
 import net.veroxuniverse.what_lurks_between.item.WetMireMudBucketItem;
 import net.veroxuniverse.what_lurks_between.item.armor.CultistRobeArmorItem;
@@ -16,7 +13,9 @@ import net.veroxuniverse.what_lurks_between.item.armor.DivingGearArmorItem;
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(WhatLurksBetween.MOD_ID, Registries.ITEM);
 
-    static Item.Properties CultistProperties = new Item.Properties().durability(490).stacksTo(1).rarity(Rarity.UNCOMMON).arch$tab(ModTabs.ITEMS_TAB);
+    static Item.Properties CultistProperties = new Item.Properties().durability(290).stacksTo(1).rarity(Rarity.UNCOMMON).arch$tab(ModTabs.ITEMS_TAB);
+    static Item.Properties DivingProperties = new Item.Properties().durability(350).stacksTo(1).rarity(Rarity.UNCOMMON).arch$tab(ModTabs.ITEMS_TAB);
+
 
     public static final RegistrySupplier<Item> WET_MIRE_MUD_BUCKET = ITEMS.register("wet_mire_mud_bucket",
             () -> new WetMireMudBucketItem(ModBlocks.WET_MIRE_MUD.get(),
@@ -35,14 +34,13 @@ public class ModItems {
             () -> new CultistRobeArmorItem(ModArmorMaterials.CULTIST_ROBE,ArmorItem.Type.BOOTS, CultistProperties));
 
     public static final RegistrySupplier<Item> DIVING_GEAR_HELMET = ITEMS.register("diving_gear_helmet",
-            () -> new DivingGearArmorItem(ModArmorMaterials.DIVING_GEAR, ArmorItem.Type.HELMET, CultistProperties));
+            () -> new DivingGearArmorItem(ModArmorMaterials.DIVING_GEAR, ArmorItem.Type.HELMET, DivingProperties));
     public static final RegistrySupplier<Item> DIVING_GEAR_CHESTPLATE = ITEMS.register("diving_gear_chestplate",
-            () -> new DivingGearArmorItem(ModArmorMaterials.DIVING_GEAR,ArmorItem.Type.CHESTPLATE, CultistProperties));
+            () -> new DivingGearArmorItem(ModArmorMaterials.DIVING_GEAR,ArmorItem.Type.CHESTPLATE, DivingProperties));
     public static final RegistrySupplier<Item> DIVING_GEAR_LEGGINGS = ITEMS.register("diving_gear_leggings",
-            () -> new DivingGearArmorItem(ModArmorMaterials.DIVING_GEAR,ArmorItem.Type.LEGGINGS, CultistProperties));
+            () -> new DivingGearArmorItem(ModArmorMaterials.DIVING_GEAR,ArmorItem.Type.LEGGINGS, DivingProperties));
     public static final RegistrySupplier<Item> DIVING_GEAR_BOOTS = ITEMS.register("diving_gear_boots",
-            () -> new DivingGearArmorItem(ModArmorMaterials.DIVING_GEAR,ArmorItem.Type.BOOTS, CultistProperties));
-
+            () -> new DivingGearArmorItem(ModArmorMaterials.DIVING_GEAR,ArmorItem.Type.BOOTS, DivingProperties));
 
     public static void register() {
         ITEMS.register();

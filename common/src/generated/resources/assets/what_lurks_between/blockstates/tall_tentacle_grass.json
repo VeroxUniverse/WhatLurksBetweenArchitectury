@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "what_lurks_between:block/tall_tentacle_grass_bottom"
+    },
+    "half=upper": {
+      "model": "what_lurks_between:block/tall_tentacle_grass_top"
+    }
+  }
+}

@@ -21,19 +21,19 @@ public class ModArmorMaterials {
 
     public static final Holder<ArmorMaterial> CULTIST_ROBE = ModArmorMaterialRegistry.registerArmorMaterial(WhatLurksBetween.MOD_ID, "cultist_robe", Util.make(new EnumMap<>(ArmorItem.Type.class), enumMap -> {
         enumMap.put(ArmorItem.Type.BOOTS, 1);
-        enumMap.put(ArmorItem.Type.LEGGINGS, 2);
-        enumMap.put(ArmorItem.Type.CHESTPLATE, 3);
+        enumMap.put(ArmorItem.Type.LEGGINGS, 3);
+        enumMap.put(ArmorItem.Type.CHESTPLATE, 4);
         enumMap.put(ArmorItem.Type.HELMET, 1);
         enumMap.put(ArmorItem.Type.BODY, 5);
-    }), 10, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, () -> Ingredient.of(Items.LEATHER));
+    }), 15, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, () -> Ingredient.of(Items.LEATHER));
 
     public static final Holder<ArmorMaterial> DIVING_GEAR = ModArmorMaterialRegistry.registerArmorMaterial(WhatLurksBetween.MOD_ID, "diving_gear", Util.make(new EnumMap<>(ArmorItem.Type.class), enumMap -> {
         enumMap.put(ArmorItem.Type.BOOTS, 2);
         enumMap.put(ArmorItem.Type.LEGGINGS, 5);
         enumMap.put(ArmorItem.Type.CHESTPLATE, 6);
-        enumMap.put(ArmorItem.Type.HELMET, 2);
+        enumMap.put(ArmorItem.Type.HELMET, 3);
         enumMap.put(ArmorItem.Type.BODY, 5);
-    }), 10, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, 0.0F, () -> Ingredient.of(Items.IRON_INGOT));
+    }), 10, SoundEvents.ARMOR_EQUIP_IRON, 1.0F, 0.0F, () -> Ingredient.of(Items.IRON_INGOT));
 
     public class ModArmorMaterialRegistry {
         public static Holder<ArmorMaterial> registerArmorMaterial(String modId, String armorId, EnumMap<ArmorItem.Type, Integer> typeProtection, int enchantability, Holder<SoundEvent> equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> ingredientItem) {

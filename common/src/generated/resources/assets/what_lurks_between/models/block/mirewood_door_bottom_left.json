@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/door_bottom_left",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "bottom": "what_lurks_between:block/mirewood_door_bottom",
+    "top": "what_lurks_between:block/mirewood_door_top"
+  }
+}
