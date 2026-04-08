@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "what_lurks_between:ghost_willow_wood"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "what_lurks_between:ghost_willow_planks"
+  }
+}

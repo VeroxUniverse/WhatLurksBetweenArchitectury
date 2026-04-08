@@ -24,6 +24,16 @@ public class ModItems {
     public static final RegistrySupplier<Item> VOID_PEARL = ITEMS.register("void_pearl",
             () -> new Item(new Item.Properties().arch$tab(ModTabs.ITEMS_TAB)));
 
+    public static final RegistrySupplier<Item> WILLOW_TEAR = ITEMS.register("willow_tear",
+            () -> new Item(new Item.Properties().arch$tab(ModTabs.ITEMS_TAB)));
+
+    public static final RegistrySupplier<Item> MIRE_FIBER = ITEMS.register("mire_fiber",
+            () -> new Item(new Item.Properties().arch$tab(ModTabs.ITEMS_TAB)));
+
+    public static final RegistrySupplier<Item> WHISTLING_REEDS_SEEDS = ITEMS.register("whistling_reeds_seeds",
+            () -> new ItemNameBlockItem(ModBlocks.WHISTLING_REEDS.get(),
+                    new Item.Properties().arch$tab(ModTabs.ITEMS_TAB)));
+
     public static final RegistrySupplier<Item> CULTIST_ROBE_HELMET = ITEMS.register("cultist_robe_helmet",
             () -> new CultistRobeArmorItem(ModArmorMaterials.CULTIST_ROBE, ArmorItem.Type.HELMET, CultistProperties));
     public static final RegistrySupplier<Item> CULTIST_ROBE_CHESTPLATE = ITEMS.register("cultist_robe_chestplate",

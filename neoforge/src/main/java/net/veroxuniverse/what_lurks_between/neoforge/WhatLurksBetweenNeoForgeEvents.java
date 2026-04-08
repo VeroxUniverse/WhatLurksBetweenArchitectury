@@ -17,13 +17,13 @@ public class WhatLurksBetweenNeoForgeEvents {
         if (event.getItemAbility() == ItemAbilities.AXE_STRIP) {
             BlockState originalState = event.getState();
 
-            if (originalState.is(ModBlocks.MIREWOOD_LOG.get())) {
-                event.setFinalState(ModBlocks.STRIPPED_MIREWOOD_LOG.get().defaultBlockState()
+            if (originalState.is(ModBlocks.GHOST_WILLOW_LOG.get())) {
+                event.setFinalState(ModBlocks.STRIPPED_GHOST_WILLOW_LOG.get().defaultBlockState()
                         .setValue(RotatedPillarBlock.AXIS, originalState.getValue(RotatedPillarBlock.AXIS)));
             }
 
-            if (originalState.is(ModBlocks.MIREWOOD_WOOD.get())) {
-                event.setFinalState(ModBlocks.STRIPPED_MIREWOOD_WOOD.get().defaultBlockState()
+            if (originalState.is(ModBlocks.GHOST_WILLOW_WOOD.get())) {
+                event.setFinalState(ModBlocks.STRIPPED_GHOST_WILLOW_WOOD.get().defaultBlockState()
                         .setValue(RotatedPillarBlock.AXIS, originalState.getValue(RotatedPillarBlock.AXIS)));
             }
         }

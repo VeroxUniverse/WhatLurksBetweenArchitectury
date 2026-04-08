@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.veroxuniverse.what_lurks_between.WhatLurksBetween;
@@ -46,69 +47,88 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.MOSSY_MIRE_MUD.get());
 
         tag(BlockTags.MINEABLE_WITH_HOE)
+                .add(ModBlocks.ROOT_TENTACLES.get())
                 .add(ModBlocks.MIRE_MOSS.get())
-                .add(ModBlocks.MIREWOOD_LEAVES.get());
+                .add(ModBlocks.GHOST_WILLOW_LEAVES.get())
+                .add(ModBlocks.TENTACLE_GRASS.get());
 
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(ModBlocks.MIRE_ROCK.get());
 
         tag(BlockTags.MINEABLE_WITH_AXE)
-                .add(ModBlocks.MIREWOOD_LOG.get())
-                .add(ModBlocks.STRIPPED_MIREWOOD_LOG.get())
-                .add(ModBlocks.MIREWOOD_WOOD.get())
-                .add(ModBlocks.STRIPPED_MIREWOOD_WOOD.get())
-                .add(ModBlocks.MIREWOOD_PLANKS.get())
-                .add(ModBlocks.MIREWOOD_DOOR.get())
-                .add(ModBlocks.MIREWOOD_TRAPDOOR.get())
-                .add(ModBlocks.MIREWOOD.planks().get())
-                .add(ModBlocks.MIREWOOD.stairs().get())
-                .add(ModBlocks.MIREWOOD.slab().get())
-                .add(ModBlocks.MIREWOOD.fence().get())
-                .add(ModBlocks.MIREWOOD.fenceGate().get())
-                .add(ModBlocks.MIREWOOD.button().get())
-                .add(ModBlocks.MIREWOOD.pressurePlate().get());
+                .add(ModBlocks.GHOST_WILLOW_ROOTS.get())
+                .add(ModBlocks.GHOST_WILLOW_LOG.get())
+                .add(ModBlocks.STRIPPED_GHOST_WILLOW_LOG.get())
+                .add(ModBlocks.GHOST_WILLOW_WOOD.get())
+                .add(ModBlocks.STRIPPED_GHOST_WILLOW_WOOD.get())
+                .add(ModBlocks.GHOST_WILLOW_PLANKS.get())
+                .add(ModBlocks.GHOST_WILLOW_DOOR.get())
+                .add(ModBlocks.GHOST_WILLOW_TRAPDOOR.get())
+                .add(ModBlocks.GHOST_WILLOW.planks().get())
+                .add(ModBlocks.GHOST_WILLOW.stairs().get())
+                .add(ModBlocks.GHOST_WILLOW.slab().get())
+                .add(ModBlocks.GHOST_WILLOW.fence().get())
+                .add(ModBlocks.GHOST_WILLOW.fenceGate().get())
+                .add(ModBlocks.GHOST_WILLOW.button().get())
+                .add(ModBlocks.GHOST_WILLOW.pressurePlate().get());
 
         tag(BlockTags.LOGS_THAT_BURN)
-                .add(ModBlocks.MIREWOOD_LOG.get())
-                .add(ModBlocks.STRIPPED_MIREWOOD_LOG.get())
-                .add(ModBlocks.MIREWOOD_WOOD.get())
-                .add(ModBlocks.STRIPPED_MIREWOOD_WOOD.get());
+                .add(ModBlocks.GHOST_WILLOW_LOG.get())
+                .add(ModBlocks.STRIPPED_GHOST_WILLOW_LOG.get())
+                .add(ModBlocks.GHOST_WILLOW_WOOD.get())
+                .add(ModBlocks.STRIPPED_GHOST_WILLOW_WOOD.get());
 
         tag(BlockTags.PLANKS)
-                .add(ModBlocks.MIREWOOD_PLANKS.get())
-                .add(ModBlocks.MIREWOOD.planks().get());
+                .add(ModBlocks.GHOST_WILLOW_PLANKS.get())
+                .add(ModBlocks.GHOST_WILLOW.planks().get());
 
         tag(BlockTags.LEAVES)
-                .add(ModBlocks.MIREWOOD_LEAVES.get());
+                .add(ModBlocks.GHOST_WILLOW_LEAVES.get());
+
+        tag(BlockTags.REPLACEABLE_BY_TREES)
+                .add(ModBlocks.TENTACLE_GRASS.get());
 
         tag(BlockTags.WOODEN_DOORS)
-                .add(ModBlocks.MIREWOOD_DOOR.get());
+                .add(ModBlocks.GHOST_WILLOW_DOOR.get());
 
         tag(BlockTags.WOODEN_TRAPDOORS)
-                .add(ModBlocks.MIREWOOD_TRAPDOOR.get());
+                .add(ModBlocks.GHOST_WILLOW_TRAPDOOR.get());
 
         tag(BlockTags.WOODEN_STAIRS)
-                .add(ModBlocks.MIREWOOD.stairs().get());
+                .add(ModBlocks.GHOST_WILLOW.stairs().get());
 
         tag(BlockTags.WOODEN_SLABS)
-                .add(ModBlocks.MIREWOOD.slab().get());
+                .add(ModBlocks.GHOST_WILLOW.slab().get());
 
         tag(BlockTags.WOODEN_FENCES)
-                .add(ModBlocks.MIREWOOD.fence().get());
+                .add(ModBlocks.GHOST_WILLOW.fence().get());
 
         tag(BlockTags.FENCE_GATES)
-                .add(ModBlocks.MIREWOOD.fenceGate().get());
+                .add(ModBlocks.GHOST_WILLOW.fenceGate().get());
 
         tag(BlockTags.WOODEN_BUTTONS)
-                .add(ModBlocks.MIREWOOD.button().get());
+                .add(ModBlocks.GHOST_WILLOW.button().get());
 
         tag(BlockTags.WOODEN_PRESSURE_PLATES)
-                .add(ModBlocks.MIREWOOD.pressurePlate().get());
+                .add(ModBlocks.GHOST_WILLOW.pressurePlate().get());
+
+        tag(BlockTags.SAPLINGS)
+                .add(ModBlocks.GHOST_WILLOW_SAPLING.get());
+
+        tag(BlockTags.MANGROVE_ROOTS_CAN_GROW_THROUGH)
+                .add(ModBlocks.MIRE_MUD.get())
+                .add(ModBlocks.WET_MIRE_MUD.get())
+                .add(Blocks.AIR)
+                .add(Blocks.WATER);
+
+        tag(BlockTags.MANGROVE_LOGS_CAN_GROW_THROUGH)
+                .add(ModBlocks.GHOST_WILLOW_ROOTS.get());
 
         this.tag(BlockTags.PREVENT_MOB_SPAWNING_INSIDE)
                 .add(ModBlocks.WET_MIRE_MUD.get());
 
         tag(ModTags.MIRE_PLANTABLE_ON)
+                .add(ModBlocks.ROOT_TENTACLES.get())
                 .add(ModBlocks.ROCKY_MIRE_MUD.get())
                 .add(ModBlocks.MIRE_MUD.get())
                 .add(ModBlocks.MOSSY_MIRE_MUD.get())
@@ -119,5 +139,10 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.MOSSY_MIRE_MUD.get())
                 .add(ModBlocks.ROCKY_MIRE_MUD.get())
                 .add(ModBlocks.WET_MIRE_MUD.get());
+
+        tag(BlockTags.ANIMALS_SPAWNABLE_ON)
+                .add(ModBlocks.MIRE_MOSS.get())
+                .add(ModBlocks.MOSSY_MIRE_MUD.get())
+                .add(ModBlocks.MIRE_MUD.get());
     }
 }

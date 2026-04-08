@@ -3,6 +3,7 @@ package net.veroxuniverse.what_lurks_between.registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.veroxuniverse.what_lurks_between.WhatLurksBetween;
 
@@ -12,4 +13,7 @@ public class ModTags {
             Registries.BLOCK,
             ResourceLocation.fromNamespaceAndPath(WhatLurksBetween.MOD_ID, "mire_plantable_on")
     );
+
+    public static final TagKey<Biome> HAS_DENSE_FOG = TagKey.create(Registries.BIOME,
+            ResourceLocation.fromNamespaceAndPath(WhatLurksBetween.MOD_ID, "has_dense_fog"));
 }

@@ -1,18 +1,12 @@
 package net.veroxuniverse.what_lurks_between.registry;
 
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
@@ -95,6 +89,15 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.STONE)));
 
+    public static final RegistrySupplier<Block> TENTACLE_GRASS = registerBlock("tentacle_grass",
+            () -> new MireGrassBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.PLANT)
+                    .noCollission()
+                    .instabreak()
+                    .sound(SoundType.GRASS)
+                    .offsetType(BlockBehaviour.OffsetType.XYZ)
+                    .pushReaction(PushReaction.DESTROY)));
+
     public static final RegistrySupplier<Block> TALL_TENTACLE_GRASS = registerBlock("tall_tentacle_grass",
             () -> new DoublePlantBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.PLANT)
@@ -104,63 +107,78 @@ public class ModBlocks {
                     .offsetType(BlockBehaviour.OffsetType.XYZ)
                     .pushReaction(PushReaction.DESTROY)));
 
-    public static final RegistrySupplier<Block> WHISTLING_REEDS = registerBlock("whistling_reeds",
-            () -> new BushBlock(BlockBehaviour.Properties.of()
+    public static final RegistrySupplier<Block> ROOT_TENTACLES = registerBlock("root_tentacles",
+            () -> new DoublePlantBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.PLANT)
                     .noCollission()
                     .instabreak()
                     .sound(SoundType.GRASS)
                     .offsetType(BlockBehaviour.OffsetType.XYZ)
-                    .pushReaction(PushReaction.DESTROY)) {
-                @Override
-                protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-                    BlockState maybeMud = level.getBlockState(pos.below());
-                    return maybeMud.is(BlockTags.DIRT) || maybeMud.is(ModBlocks.MIRE_MUD.get());
-                }
-                @Override
-                protected MapCodec<? extends BushBlock> codec() {
-                    return RecordCodecBuilder.mapCodec(inst -> inst.stable(this));
-                }
-            });
+                    .pushReaction(PushReaction.DESTROY)));
 
-    public static final RegistrySupplier<Block> MIREWOOD_LOG = registerBlock("mirewood_log",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)
-                    .mapColor(MapColor.WOOD)));
-
-    public static final RegistrySupplier<Block> MIREWOOD_WOOD = registerBlock("mirewood_wood",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD)
-                    .mapColor(MapColor.WOOD)));
-
-    public static final RegistrySupplier<Block> STRIPPED_MIREWOOD_LOG = registerBlock("stripped_mirewood_log",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG)
-                    .mapColor(MapColor.WOOD)));
-
-    public static final RegistrySupplier<Block> STRIPPED_MIREWOOD_WOOD = registerBlock("stripped_mirewood_wood",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD)
-                    .mapColor(MapColor.WOOD)));
-
-    public static final RegistrySupplier<Block> MIREWOOD_LEAVES = registerBlock("mirewood_leaves",
-            () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)
+    public static final RegistrySupplier<Block> WHISTLING_REEDS = registerBlock("whistling_reeds",
+            () -> new MireReedBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.PLANT)
+                    .noCollission()
+                    .randomTicks()
+                    .instabreak()
+                    .sound(SoundType.CROP)
+                    .noOcclusion()));
+
+    public static final RegistrySupplier<Block> GHOST_WILLOW_LOG = registerBlock("ghost_willow_log",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)
+                    .mapColor(MapColor.COLOR_BLACK)));
+
+    public static final RegistrySupplier<Block> GHOST_WILLOW_WOOD = registerBlock("ghost_willow_wood",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD)
+                    .mapColor(MapColor.COLOR_BLACK)));
+
+    public static final RegistrySupplier<Block> STRIPPED_GHOST_WILLOW_LOG = registerBlock("stripped_ghost_willow_log",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG)
+                    .mapColor(MapColor.COLOR_BLACK)));
+
+    public static final RegistrySupplier<Block> STRIPPED_GHOST_WILLOW_WOOD = registerBlock("stripped_ghost_willow_wood",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD)
+                    .mapColor(MapColor.COLOR_BLACK)));
+
+    public static final RegistrySupplier<Block> GHOST_WILLOW_LEAVES = registerBlock("ghost_willow_leaves",
+            () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)
+                    .mapColor(MapColor.SNOW)
                     .noOcclusion()
                     .isSuffocating((state, level, pos) -> false)
                     .isViewBlocking((state, level, pos) -> false)
                     .randomTicks()
             ));
 
-    public static final RegistrySupplier<Block> MIREWOOD_TRAPDOOR = registerBlock("mirewood_trapdoor",
+    public static final RegistrySupplier<Block> BLEEDING_GHOST_WILLOW_LEAVES = registerBlock("bleeding_ghost_willow_leaves",
+            () -> new BleedingLeavesBlock(BlockBehaviour.Properties.ofFullCopy(ModBlocks.GHOST_WILLOW_LEAVES.get())
+                    .mapColor(MapColor.COLOR_RED)
+                    .randomTicks()
+            ));
+
+    public static final RegistrySupplier<Block> GHOST_WILLOW_TRAPDOOR = registerBlock("ghost_willow_trapdoor",
             () -> new TrapDoorBlock(BlockSetType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR)
                     .noOcclusion()));
 
-    public static final RegistrySupplier<Block> MIREWOOD_DOOR = registerBlock("mirewood_door",
+    public static final RegistrySupplier<Block> GHOST_WILLOW_DOOR = registerBlock("ghost_willow_door",
             () -> new DoorBlock(BlockSetType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR)
                     .noOcclusion()));
 
-    public static final WoodSet MIREWOOD = registerWoodSet("mirewood",
-            BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS));
+    public static final WoodSet GHOST_WILLOW = registerWoodSet("ghost_willow",
+            BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).mapColor(MapColor.COLOR_BLACK));
 
-    public static final RegistrySupplier<Block> MIREWOOD_PLANKS = MIREWOOD.planks();
+    public static final RegistrySupplier<Block> GHOST_WILLOW_PLANKS = GHOST_WILLOW.planks();
 
+    public static final RegistrySupplier<Block> GHOST_WILLOW_ROOTS = registerBlock("ghost_willow_roots",
+            () -> new MangroveRootsBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_ROOTS)
+                    .mapColor(MapColor.COLOR_BLACK).noOcclusion()));
+
+    public static final RegistrySupplier<Block> GHOST_WILLOW_SAPLING = registerBlock("ghost_willow_sapling",
+            () -> new SaplingBlock(ModTreeGrowers.GHOST_WILLOW,
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)
+                            .mapColor(MapColor.PLANT).noOcclusion()));
+
+    // --- REGISTRATION ---
 
     private static <T extends Block> RegistrySupplier<T> registerBlock(String name, Supplier<T> block) {
         return registerBlockWithCustomTab(name, block, ModTabs.BLOCKS_TAB);

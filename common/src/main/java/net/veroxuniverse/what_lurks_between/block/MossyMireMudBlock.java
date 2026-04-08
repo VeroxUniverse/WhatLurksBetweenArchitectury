@@ -12,7 +12,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.veroxuniverse.what_lurks_between.registry.ModBlocks;
 
 public class MossyMireMudBlock extends Block {
-
     private static final VoxelShape COLLISION_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D);
 
     public MossyMireMudBlock(Properties properties) {
@@ -39,18 +38,22 @@ public class MossyMireMudBlock extends Block {
         return true;
     }
 
-    private static boolean canBeMossy(BlockState state, ServerLevel level, BlockPos pos) {
+    private static boolean canMossSurvive(ServerLevel level, BlockPos pos) {
         BlockPos abovePos = pos.above();
         BlockState aboveState = level.getBlockState(abovePos);
 
-        return level.getMaxLocalRawBrightness(abovePos) >= 4 &&
-                aboveState.getLightBlock(level, abovePos) < level.getMaxLightLevel();
+        if (!level.getFluidState(abovePos).isEmpty() || aboveState.isSolidRender(level, abovePos)) {
+            return false;
+        }
+
+        return level.getBrightness(net.minecraft.world.level.LightLayer.SKY, abovePos) >= 4 ||
+                level.getBrightness(net.minecraft.world.level.LightLayer.BLOCK, abovePos) >= 4;
     }
 
     @Override
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!level.isClientSide) {
-            if (!canBeMossy(state, level, pos)) {
+            if (!canMossSurvive(level, pos)) {
                 level.setBlockAndUpdate(pos, ModBlocks.MIRE_MUD.get().defaultBlockState());
             }
         }

@@ -22,6 +22,9 @@
     ],
     "modmenu": [
       "net.veroxuniverse.what_lurks_between.fabric.ModMenuIntegration"
+    ],
+    "terrablender": [
+      "net.veroxuniverse.what_lurks_between.fabric.FabricTerraBlenderApi"
     ]
   },
   "mixins": [
@@ -36,7 +39,8 @@
     "fabric-api": "*",
     "azurelib": ">=3.1.4",
     "cloth-config2": "*",
-    "veroxlib": ">=0.0.1"
+    "veroxlib": ">=0.0.1",
+    "terrablender": "*"
   },
   "suggests": {
     "modmenu": "*"

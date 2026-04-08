@@ -1,6 +1,8 @@
 {
   "values": [
+    "what_lurks_between:root_tentacles",
     "what_lurks_between:mire_moss",
-    "what_lurks_between:mirewood_leaves"
+    "what_lurks_between:ghost_willow_leaves",
+    "what_lurks_between:tentacle_grass"
   ]
 }

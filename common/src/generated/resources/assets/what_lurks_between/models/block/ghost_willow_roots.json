@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "bottom": "what_lurks_between:block/ghost_willow_roots_top",
+    "side": "what_lurks_between:block/ghost_willow_roots_side",
+    "top": "what_lurks_between:block/ghost_willow_roots_top"
+  }
+}

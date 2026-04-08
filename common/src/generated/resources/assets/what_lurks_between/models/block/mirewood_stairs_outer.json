@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "what_lurks_between:block/mirewood_planks",
-    "side": "what_lurks_between:block/mirewood_planks",
-    "top": "what_lurks_between:block/mirewood_planks"
-  }
-}

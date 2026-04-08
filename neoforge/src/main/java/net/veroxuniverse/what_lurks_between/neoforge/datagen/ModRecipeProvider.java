@@ -21,19 +21,24 @@ public class ModRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes(RecipeOutput output) {
 
-        planksFromLogs(output, ModBlocks.MIREWOOD_PLANKS.get(), ModBlocks.MIREWOOD_LOG.get(), 4);
-        planksFromLogs(output, ModBlocks.MIREWOOD_PLANKS.get(), ModBlocks.STRIPPED_MIREWOOD_LOG.get(), 4);
-        planksFromLogs(output, ModBlocks.MIREWOOD_PLANKS.get(), ModBlocks.MIREWOOD_WOOD.get(), 4);
-        planksFromLogs(output, ModBlocks.MIREWOOD_PLANKS.get(), ModBlocks.STRIPPED_MIREWOOD_WOOD.get(), 4);
+        planksFromLogs(output, ModBlocks.GHOST_WILLOW_PLANKS.get(), ModBlocks.GHOST_WILLOW_LOG.get(), 4);
+        planksFromLogs(output, ModBlocks.GHOST_WILLOW_PLANKS.get(), ModBlocks.STRIPPED_GHOST_WILLOW_LOG.get(), 4);
+        planksFromLogs(output, ModBlocks.GHOST_WILLOW_PLANKS.get(), ModBlocks.GHOST_WILLOW_WOOD.get(), 4);
+        planksFromLogs(output, ModBlocks.GHOST_WILLOW_PLANKS.get(), ModBlocks.STRIPPED_GHOST_WILLOW_WOOD.get(), 4);
 
-        woodFromLogs(output, ModBlocks.MIREWOOD_WOOD.get(), ModBlocks.MIREWOOD_LOG.get());
-        woodFromLogs(output, ModBlocks.STRIPPED_MIREWOOD_WOOD.get(), ModBlocks.STRIPPED_MIREWOOD_LOG.get());
+        woodFromLogs(output, ModBlocks.GHOST_WILLOW_WOOD.get(), ModBlocks.GHOST_WILLOW_LOG.get());
+        woodFromLogs(output, ModBlocks.STRIPPED_GHOST_WILLOW_WOOD.get(), ModBlocks.STRIPPED_GHOST_WILLOW_LOG.get());
 
-        generateWoodSetRecipes(output, ModBlocks.MIREWOOD);
+        generateWoodSetRecipes(output, ModBlocks.GHOST_WILLOW);
 
-        doorBuilder(ModBlocks.MIREWOOD_DOOR.get(), Ingredient.of(ModBlocks.MIREWOOD_PLANKS.get())).unlockedBy("has_planks", has(ModBlocks.MIREWOOD_PLANKS.get())).save(output);
-        trapdoorBuilder(ModBlocks.MIREWOOD_TRAPDOOR.get(), Ingredient.of(ModBlocks.MIREWOOD_PLANKS.get())).unlockedBy("has_planks", has(ModBlocks.MIREWOOD_PLANKS.get())).save(output);
+        doorBuilder(ModBlocks.GHOST_WILLOW_DOOR.get(), Ingredient.of(ModBlocks.GHOST_WILLOW_PLANKS.get())).unlockedBy("has_planks", has(ModBlocks.GHOST_WILLOW_PLANKS.get())).save(output);
+        trapdoorBuilder(ModBlocks.GHOST_WILLOW_TRAPDOOR.get(), Ingredient.of(ModBlocks.GHOST_WILLOW_PLANKS.get())).unlockedBy("has_planks", has(ModBlocks.GHOST_WILLOW_PLANKS.get())).save(output);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.MIRE_FIBER.get(), 1)
+                .pattern("###")
+                .define('#', ModBlocks.WHISTLING_REEDS.get())
+                .unlockedBy("has_whistling_reeds", has(ModBlocks.WHISTLING_REEDS.get()))
+                .save(output);
     }
 
     private void generateWoodSetRecipes(RecipeOutput output, ModBlocks.WoodSet set) {

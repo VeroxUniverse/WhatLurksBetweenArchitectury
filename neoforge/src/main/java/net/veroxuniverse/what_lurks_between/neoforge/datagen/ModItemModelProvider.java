@@ -32,13 +32,20 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.DIVING_GEAR_BOOTS);
 
         tallPlantItem(ModBlocks.TALL_TENTACLE_GRASS.get().asItem());
+        tallPlantItem(ModBlocks.ROOT_TENTACLES.get().asItem());
+        blockTextureItem(ModBlocks.TENTACLE_GRASS.get().asItem());
         blockTextureItem(ModBlocks.WHISTLING_REEDS.get().asItem());
 
-        fenceItem(ModBlocks.MIREWOOD.fence(), ModBlocks.MIREWOOD.planks());
-        buttonItem(ModBlocks.MIREWOOD.button(), ModBlocks.MIREWOOD.planks());
-        doorItem(ModBlocks.MIREWOOD_DOOR);
+        fenceItem(ModBlocks.GHOST_WILLOW.fence(), ModBlocks.GHOST_WILLOW.planks());
+        buttonItem(ModBlocks.GHOST_WILLOW.button(), ModBlocks.GHOST_WILLOW.planks());
+        doorItem(ModBlocks.GHOST_WILLOW_DOOR);
 
-        withExistingParent("mirewood_trapdoor", modLoc("block/mirewood_trapdoor_bottom"));
+        blockTextureItem(ModBlocks.GHOST_WILLOW_SAPLING.get().asItem());
+
+        simpleItem(ModItems.MIRE_FIBER);
+        simpleItem(ModItems.WHISTLING_REEDS_SEEDS);
+
+        withExistingParent("ghost_willow_trapdoor", modLoc("block/ghost_willow_trapdoor_bottom"));
     }
 
     private void simpleItem(Holder<Item> item) {

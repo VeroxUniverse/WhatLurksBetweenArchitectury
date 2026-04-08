@@ -2,6 +2,7 @@ package net.veroxuniverse.what_lurks_between.neoforge.datagen;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
@@ -10,6 +11,8 @@ import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.veroxuniverse.what_lurks_between.WhatLurksBetween;
 import net.veroxuniverse.what_lurks_between.registry.ModBlocks;
+
+import java.util.function.Function;
 
 public class ModBlockStateProvider extends BlockStateProvider {
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
@@ -35,39 +38,60 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlockItem(mossyMud, mossyMudModel);
 
         makeDoublePlant(ModBlocks.TALL_TENTACLE_GRASS.get(), "tall_tentacle_grass_bottom", "tall_tentacle_grass_top");
+        simpleBlock(ModBlocks.TENTACLE_GRASS.get(),
+                models().cross("tentacle_grass", modLoc("block/tentacle_grass")).renderType("cutout"));
+        makeDoublePlant(ModBlocks.ROOT_TENTACLES.get(), "root_tentacles_bottom", "root_tentacles_top");
 
-        String reedName = ModBlocks.WHISTLING_REEDS.getId().getPath();
-        simpleBlock(ModBlocks.WHISTLING_REEDS.get(),
-                models().cross(reedName, modLoc("block/"+ reedName)).renderType("cutout"));
+        makeWhistlingReedsCrop((CropBlock) ModBlocks.WHISTLING_REEDS.get(), "whistling_reeds");
 
-        simpleBlockWithItem(ModBlocks.MIREWOOD_LEAVES.get(), cubeAll(ModBlocks.MIREWOOD_LEAVES.get()));
+        simpleBlockWithItem(ModBlocks.GHOST_WILLOW_LEAVES.get(), cubeAll(ModBlocks.GHOST_WILLOW_LEAVES.get()));
+        simpleBlockWithItem(ModBlocks.BLEEDING_GHOST_WILLOW_LEAVES.get(), cubeAll(ModBlocks.BLEEDING_GHOST_WILLOW_LEAVES.get()));
 
-        logBlock((RotatedPillarBlock) ModBlocks.MIREWOOD_LOG.get());
-        logBlock((RotatedPillarBlock) ModBlocks.STRIPPED_MIREWOOD_LOG.get());
 
-        axisBlock((RotatedPillarBlock) ModBlocks.MIREWOOD_WOOD.get(), modLoc("block/mirewood_log"), modLoc("block/mirewood_log"));
-        axisBlock((RotatedPillarBlock) ModBlocks.STRIPPED_MIREWOOD_WOOD.get(), modLoc("block/stripped_mirewood_log"), modLoc("block/stripped_mirewood_log"));
+        logBlock((RotatedPillarBlock) ModBlocks.GHOST_WILLOW_LOG.get());
+        logBlock((RotatedPillarBlock) ModBlocks.STRIPPED_GHOST_WILLOW_LOG.get());
 
-        simpleBlockItem(ModBlocks.MIREWOOD_LOG.get(), models().withExistingParent("mirewood_log", "minecraft:block/cube_column")
-                .texture("side", modLoc("block/mirewood_log"))
-                .texture("end", modLoc("block/mirewood_log_top")));
+        axisBlock((RotatedPillarBlock) ModBlocks.GHOST_WILLOW_WOOD.get(), modLoc("block/ghost_willow_log"), modLoc("block/ghost_willow_log"));
+        axisBlock((RotatedPillarBlock) ModBlocks.STRIPPED_GHOST_WILLOW_WOOD.get(), modLoc("block/stripped_ghost_willow_log"), modLoc("block/stripped_ghost_willow_log"));
 
-        simpleBlockItem(ModBlocks.STRIPPED_MIREWOOD_LOG.get(), models().withExistingParent("stripped_mirewood_log", "minecraft:block/cube_column")
-                .texture("side", modLoc("block/stripped_mirewood_log"))
-                .texture("end", modLoc("block/stripped_mirewood_log_top")));
+        simpleBlockItem(ModBlocks.GHOST_WILLOW_LOG.get(), models().withExistingParent("ghost_willow_log", "minecraft:block/cube_column")
+                .texture("side", modLoc("block/ghost_willow_log"))
+                .texture("end", modLoc("block/ghost_willow_log_top")));
 
-        simpleBlockItem(ModBlocks.MIREWOOD_WOOD.get(), models().withExistingParent("mirewood_wood", "minecraft:block/cube_all")
-                .texture("all", modLoc("block/mirewood_log")));
+        simpleBlockItem(ModBlocks.STRIPPED_GHOST_WILLOW_LOG.get(), models().withExistingParent("stripped_ghost_willow_log", "minecraft:block/cube_column")
+                .texture("side", modLoc("block/stripped_ghost_willow_log"))
+                .texture("end", modLoc("block/stripped_ghost_willow_log_top")));
 
-        simpleBlockItem(ModBlocks.STRIPPED_MIREWOOD_WOOD.get(), models().withExistingParent("stripped_mirewood_wood", "minecraft:block/cube_all")
-                .texture("all", modLoc("block/stripped_mirewood_log")));
+        simpleBlockItem(ModBlocks.GHOST_WILLOW_WOOD.get(), models().withExistingParent("ghost_willow_wood", "minecraft:block/cube_all")
+                .texture("all", modLoc("block/ghost_willow_log")));
 
-        doorBlockWithRenderType((DoorBlock) ModBlocks.MIREWOOD_DOOR.get(), modLoc("block/mirewood_door_bottom"), modLoc("block/mirewood_door_top"), "cutout");
+        simpleBlockItem(ModBlocks.STRIPPED_GHOST_WILLOW_WOOD.get(), models().withExistingParent("stripped_ghost_willow_wood", "minecraft:block/cube_all")
+                .texture("all", modLoc("block/stripped_ghost_willow_log")));
 
-        trapdoorBlockWithRenderType((TrapDoorBlock) ModBlocks.MIREWOOD_TRAPDOOR.get(), modLoc("block/mirewood_trapdoor"), true, "cutout");
-        simpleBlockItem(ModBlocks.MIREWOOD_TRAPDOOR.get(), models().withExistingParent("mirewood_trapdoor", modLoc("block/mirewood_trapdoor_bottom")));
+        doorBlockWithRenderType((DoorBlock) ModBlocks.GHOST_WILLOW_DOOR.get(), modLoc("block/ghost_willow_door_bottom"), modLoc("block/ghost_willow_door_top"), "cutout");
 
-        blockSet(ModBlocks.MIREWOOD);
+        trapdoorBlockWithRenderType((TrapDoorBlock) ModBlocks.GHOST_WILLOW_TRAPDOOR.get(), modLoc("block/ghost_willow_trapdoor"), true, "cutout");
+        simpleBlockItem(ModBlocks.GHOST_WILLOW_TRAPDOOR.get(), models().withExistingParent("ghost_willow_trapdoor", modLoc("block/ghost_willow_trapdoor_bottom")));
+
+        topBottomBlock(ModBlocks.GHOST_WILLOW_ROOTS.get(), "ghost_willow_roots_side", "ghost_willow_roots_top");
+
+        simpleBlock(ModBlocks.GHOST_WILLOW_SAPLING.get(),
+                models().cross(ModBlocks.GHOST_WILLOW_SAPLING.getId().getPath(),
+                        modLoc("block/ghost_willow_sapling")).renderType("cutout"));
+
+        blockSet(ModBlocks.GHOST_WILLOW);
+    }
+
+    private void topBottomBlock(Block block, String side, String topBottom) {
+        ModelFile model = models().cubeBottomTop(
+                block.asItem().toString(),
+                modLoc("block/" + side),
+                modLoc("block/" + topBottom),
+                modLoc("block/" + topBottom)
+        ).renderType("cutout");
+
+        simpleBlock(block, model);
+        simpleBlockItem(block, model);
     }
 
     private void blockSet(ModBlocks.WoodSet set) {
@@ -100,4 +124,33 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     .build();
         });
     }
+
+    public void makeWhistlingReedsCrop(CropBlock block, String name) {
+        getVariantBuilder(block).forAllStates(state -> {
+            int age = state.getValue(BlockStateProperties.AGE_7);
+            DoubleBlockHalf half = state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF);
+
+            String modelName;
+            String textureName;
+
+            if (age < 6) {
+                modelName = name + "_stage" + age;
+                textureName = modelName;
+            } else {
+                boolean isTop = (half == DoubleBlockHalf.UPPER);
+                modelName = name + "_stage" + age + (isTop ? "_top" : "_bottom");
+
+                if (!isTop && age == 7) {
+                    textureName = name + "_stage6_bottom";
+                } else {
+                    textureName = modelName;
+                }
+            }
+
+            return ConfiguredModel.builder()
+                    .modelFile(models().cross(modelName, modLoc("block/" + textureName)).renderType("cutout"))
+                    .build();
+        });
+    }
+
 }

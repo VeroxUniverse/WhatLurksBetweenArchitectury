@@ -1,7 +1,100 @@
 {
   "variants": {
-    "": {
-      "model": "what_lurks_between:block/whistling_reeds"
+    "age=0,half=lower,waterlogged=false": {
+      "model": "what_lurks_between:block/whistling_reeds_stage0"
+    },
+    "age=0,half=lower,waterlogged=true": {
+      "model": "what_lurks_between:block/whistling_reeds_stage0"
+    },
+    "age=0,half=upper,waterlogged=false": {
+      "model": "what_lurks_between:block/whistling_reeds_stage0"
+    },
+    "age=0,half=upper,waterlogged=true": {
+      "model": "what_lurks_between:block/whistling_reeds_stage0"
+    },
+    "age=1,half=lower,waterlogged=false": {
+      "model": "what_lurks_between:block/whistling_reeds_stage1"
+    },
+    "age=1,half=lower,waterlogged=true": {
+      "model": "what_lurks_between:block/whistling_reeds_stage1"
+    },
+    "age=1,half=upper,waterlogged=false": {
+      "model": "what_lurks_between:block/whistling_reeds_stage1"
+    },
+    "age=1,half=upper,waterlogged=true": {
+      "model": "what_lurks_between:block/whistling_reeds_stage1"
+    },
+    "age=2,half=lower,waterlogged=false": {
+      "model": "what_lurks_between:block/whistling_reeds_stage2"
+    },
+    "age=2,half=lower,waterlogged=true": {
+      "model": "what_lurks_between:block/whistling_reeds_stage2"
+    },
+    "age=2,half=upper,waterlogged=false": {
+      "model": "what_lurks_between:block/whistling_reeds_stage2"
+    },
+    "age=2,half=upper,waterlogged=true": {
+      "model": "what_lurks_between:block/whistling_reeds_stage2"
+    },
+    "age=3,half=lower,waterlogged=false": {
+      "model": "what_lurks_between:block/whistling_reeds_stage3"
+    },
+    "age=3,half=lower,waterlogged=true": {
+      "model": "what_lurks_between:block/whistling_reeds_stage3"
+    },
+    "age=3,half=upper,waterlogged=false": {
+      "model": "what_lurks_between:block/whistling_reeds_stage3"
+    },
+    "age=3,half=upper,waterlogged=true": {
+      "model": "what_lurks_between:block/whistling_reeds_stage3"
+    },
+    "age=4,half=lower,waterlogged=false": {
+      "model": "what_lurks_between:block/whistling_reeds_stage4"
+    },
+    "age=4,half=lower,waterlogged=true": {
+      "model": "what_lurks_between:block/whistling_reeds_stage4"
+    },
+    "age=4,half=upper,waterlogged=false": {
+      "model": "what_lurks_between:block/whistling_reeds_stage4"
+    },
+    "age=4,half=upper,waterlogged=true": {
+      "model": "what_lurks_between:block/whistling_reeds_stage4"
+    },
+    "age=5,half=lower,waterlogged=false": {
+      "model": "what_lurks_between:block/whistling_reeds_stage5"
+    },
+    "age=5,half=lower,waterlogged=true": {
+      "model": "what_lurks_between:block/whistling_reeds_stage5"
+    },
+    "age=5,half=upper,waterlogged=false": {
+      "model": "what_lurks_between:block/whistling_reeds_stage5"
+    },
+    "age=5,half=upper,waterlogged=true": {
+      "model": "what_lurks_between:block/whistling_reeds_stage5"
+    },
+    "age=6,half=lower,waterlogged=false": {
+      "model": "what_lurks_between:block/whistling_reeds_stage6_bottom"
+    },
+    "age=6,half=lower,waterlogged=true": {
+      "model": "what_lurks_between:block/whistling_reeds_stage6_bottom"
+    },
+    "age=6,half=upper,waterlogged=false": {
+      "model": "what_lurks_between:block/whistling_reeds_stage6_top"
+    },
+    "age=6,half=upper,waterlogged=true": {
+      "model": "what_lurks_between:block/whistling_reeds_stage6_top"
+    },
+    "age=7,half=lower,waterlogged=false": {
+      "model": "what_lurks_between:block/whistling_reeds_stage7_bottom"
+    },
+    "age=7,half=lower,waterlogged=true": {
+      "model": "what_lurks_between:block/whistling_reeds_stage7_bottom"
+    },
+    "age=7,half=upper,waterlogged=false": {
+      "model": "what_lurks_between:block/whistling_reeds_stage7_top"
+    },
+    "age=7,half=upper,waterlogged=true": {
+      "model": "what_lurks_between:block/whistling_reeds_stage7_top"
     }
   }
 }

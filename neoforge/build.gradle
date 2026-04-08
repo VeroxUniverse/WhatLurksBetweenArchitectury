@@ -56,6 +56,7 @@ dependencies {
     neoForge "net.neoforged:neoforge:$rootProject.neoforge_version"
 
     modImplementation "dev.architectury:architectury-neoforge:$rootProject.architectury_api_version"
+    implementation "com.github.glitchfiend:TerraBlender-neoforge:${terrablender_version}"
 
     runtimeOnly "mezz.jei:jei-1.21-neoforge:${jei_version}"
     modApi "me.shedaniel.cloth:cloth-config-neoforge:${rootProject.cloth_config_version}"

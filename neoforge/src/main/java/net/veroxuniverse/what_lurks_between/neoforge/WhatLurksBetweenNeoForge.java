@@ -2,24 +2,20 @@ package net.veroxuniverse.what_lurks_between.neoforge;
 
 import mod.azure.azurelib.common.animation.cache.AzIdentityRegistry;
 import mod.azure.azurelib.common.render.armor.AzArmorRendererRegistry;
-import mod.azure.azurelib.common.render.item.AzItemRendererRegistry;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FireBlock;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
-import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.veroxuniverse.what_lurks_between.WhatLurksBetween;
 import net.veroxuniverse.what_lurks_between.item.armor.renderer.CultistRobeRenderer;
 import net.veroxuniverse.what_lurks_between.item.armor.renderer.DivingGearRenderer;
-import net.veroxuniverse.what_lurks_between.registry.ModAttributes;
 import net.veroxuniverse.what_lurks_between.registry.ModBlocks;
 import net.veroxuniverse.what_lurks_between.registry.ModItems;
+import net.veroxuniverse.what_lurks_between.worldgen.ModTerrablender;
 
 @Mod(WhatLurksBetween.MOD_ID)
 public final class WhatLurksBetweenNeoForge {
@@ -32,16 +28,17 @@ public final class WhatLurksBetweenNeoForge {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
+            event.enqueueWork(ModTerrablender::register);
             FireBlock fire = (FireBlock) Blocks.FIRE;
 
-            registerWoodSetFlammable(fire, ModBlocks.MIREWOOD);
+            registerWoodSetFlammable(fire, ModBlocks.GHOST_WILLOW);
 
-            fire.setFlammable(ModBlocks.MIREWOOD_LOG.get(), 5, 5);
-            fire.setFlammable(ModBlocks.STRIPPED_MIREWOOD_LOG.get(), 5, 5);
-            fire.setFlammable(ModBlocks.MIREWOOD_WOOD.get(), 5, 5);
-            fire.setFlammable(ModBlocks.STRIPPED_MIREWOOD_WOOD.get(), 5, 5);
-            fire.setFlammable(ModBlocks.MIREWOOD_PLANKS.get(), 5, 20);
-            fire.setFlammable(ModBlocks.MIREWOOD_LEAVES.get(), 30, 60);
+            fire.setFlammable(ModBlocks.GHOST_WILLOW_LOG.get(), 5, 5);
+            fire.setFlammable(ModBlocks.STRIPPED_GHOST_WILLOW_LOG.get(), 5, 5);
+            fire.setFlammable(ModBlocks.GHOST_WILLOW_WOOD.get(), 5, 5);
+            fire.setFlammable(ModBlocks.STRIPPED_GHOST_WILLOW_WOOD.get(), 5, 5);
+            fire.setFlammable(ModBlocks.GHOST_WILLOW_PLANKS.get(), 5, 20);
+            fire.setFlammable(ModBlocks.GHOST_WILLOW_LEAVES.get(), 30, 60);
         });
     }
 

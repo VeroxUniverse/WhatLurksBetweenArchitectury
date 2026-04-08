@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "what_lurks_between:block/mirewood_log",
-    "end": "what_lurks_between:block/mirewood_log",
-    "side": "what_lurks_between:block/mirewood_log"
-  }
-}

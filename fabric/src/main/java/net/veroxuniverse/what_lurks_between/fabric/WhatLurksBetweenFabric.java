@@ -12,20 +12,20 @@ public final class WhatLurksBetweenFabric implements ModInitializer {
     public void onInitialize() {
         WhatLurksBetween.init();
 
-        StrippableBlockRegistry.register(ModBlocks.MIREWOOD_LOG.get(), ModBlocks.STRIPPED_MIREWOOD_LOG.get());
-        StrippableBlockRegistry.register(ModBlocks.MIREWOOD_WOOD.get(), ModBlocks.STRIPPED_MIREWOOD_WOOD.get());
+        StrippableBlockRegistry.register(ModBlocks.GHOST_WILLOW_LOG.get(), ModBlocks.STRIPPED_GHOST_WILLOW_LOG.get());
+        StrippableBlockRegistry.register(ModBlocks.GHOST_WILLOW_WOOD.get(), ModBlocks.STRIPPED_GHOST_WILLOW_WOOD.get());
 
         var registry = FlammableBlockRegistry.getDefaultInstance();
 
-        registerFabricFlammable(ModBlocks.MIREWOOD);
-        registry.add(ModBlocks.MIREWOOD_LOG.get(), 5, 5);
-        registry.add(ModBlocks.STRIPPED_MIREWOOD_LOG.get(), 5, 5);
-        registry.add(ModBlocks.MIREWOOD_WOOD.get(), 5, 5);
-        registry.add(ModBlocks.STRIPPED_MIREWOOD_WOOD.get(), 5, 5);
-        registry.add(ModBlocks.MIREWOOD_PLANKS.get(), 5, 20);
-        registry.add(ModBlocks.MIREWOOD_LEAVES.get(), 30, 60);
-        registry.add(ModBlocks.MIREWOOD_DOOR.get(), 5, 20);
-        registry.add(ModBlocks.MIREWOOD_TRAPDOOR.get(), 5, 20);
+        registerFabricFlammable(ModBlocks.GHOST_WILLOW);
+        registry.add(ModBlocks.GHOST_WILLOW_LOG.get(), 5, 5);
+        registry.add(ModBlocks.STRIPPED_GHOST_WILLOW_LOG.get(), 5, 5);
+        registry.add(ModBlocks.GHOST_WILLOW_WOOD.get(), 5, 5);
+        registry.add(ModBlocks.STRIPPED_GHOST_WILLOW_WOOD.get(), 5, 5);
+        registry.add(ModBlocks.GHOST_WILLOW_PLANKS.get(), 5, 20);
+        registry.add(ModBlocks.GHOST_WILLOW_LEAVES.get(), 30, 60);
+        registry.add(ModBlocks.GHOST_WILLOW_DOOR.get(), 5, 20);
+        registry.add(ModBlocks.GHOST_WILLOW_TRAPDOOR.get(), 5, 20);
     }
 
     private void registerFabricFlammable(ModBlocks.WoodSet set) {

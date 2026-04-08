@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/pressure_plate_up",
+  "textures": {
+    "texture": "what_lurks_between:block/ghost_willow_planks"
+  }
+}
