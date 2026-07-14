@@ -1,5 +1,7 @@
 {
   "values": [
+    "what_lurks_between:cobbled_abyssal_stone",
+    "what_lurks_between:abyssal_stone",
     "what_lurks_between:mire_rock"
   ]
 }

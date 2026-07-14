@@ -31,6 +31,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.DIVING_GEAR_LEGGINGS);
         simpleItem(ModItems.DIVING_GEAR_BOOTS);
 
+        simpleItem(ModItems.WILLOW_TEAR);
+        simpleItem(ModItems.PALE_FIREFLIES_BOTTLE);
+
         tallPlantItem(ModBlocks.TALL_TENTACLE_GRASS.get().asItem());
         tallPlantItem(ModBlocks.ROOT_TENTACLES.get().asItem());
         blockTextureItem(ModBlocks.TENTACLE_GRASS.get().asItem());

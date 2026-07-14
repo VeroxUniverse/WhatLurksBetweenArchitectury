@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "what_lurks_between:block/abyssal_stone_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "what_lurks_between:block/abyssal_stone"
+    },
+    "axis=z": {
+      "model": "what_lurks_between:block/abyssal_stone_horizontal",
+      "x": 90
+    }
+  }
+}

@@ -2,11 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "F": { "item": "minecraft:leather" },
-    "W": { "item": "minecraft:yellow_wool" }
+    "F": { "tag": "c:leathers" },
+    "W": { "item": "minecraft:yellow_wool" },
+    "S": { "item": "what_lurks_between:mire_fiber" }
   },
   "pattern": [
-    "W W",
+    "WSW",
     "F F"
   ],
   "result": {

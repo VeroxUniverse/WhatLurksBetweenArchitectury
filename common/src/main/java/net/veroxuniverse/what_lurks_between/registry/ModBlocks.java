@@ -178,6 +178,36 @@ public class ModBlocks {
                     BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)
                             .mapColor(MapColor.PLANT).noOcclusion()));
 
+    public static final RegistrySupplier<Block> CRACKED_BONE_BLOCK = registerBlock("cracked_bone_block",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK)
+                    .mapColor(MapColor.SAND)
+                    .strength(2.0f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.BONE_BLOCK)));
+
+    public static final RegistrySupplier<Block> ABYSSAL_STONE = registerBlock("abyssal_stone",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.DEEPSLATE)
+                    .strength(2.0f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.STONE)));
+
+    public static final RegistrySupplier<Block> COBBLED_ABYSSAL_STONE = registerBlock("cobbled_abyssal_stone",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.DEEPSLATE)
+                    .strength(2.0f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.STONE)));
+
+    public static final RegistrySupplier<Block> ABYSSAL_VENT = registerBlock("abyssal_vent",
+            () -> new VentBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.DEEPSLATE)
+                    .strength(2.0f)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+                    .randomTicks()
+                    .sound(SoundType.STONE)));
+
     // --- REGISTRATION ---
 
     private static <T extends Block> RegistrySupplier<T> registerBlock(String name, Supplier<T> block) {

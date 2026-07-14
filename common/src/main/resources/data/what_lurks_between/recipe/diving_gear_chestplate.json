@@ -3,11 +3,12 @@
   "category": "equipment",
   "key": {
     "C": { "item": "minecraft:iron_ingot" },
-    "G": { "item": "minecraft:leather" }
+    "G": { "tag": "c:leathers" },
+    "S": { "item": "what_lurks_between:mire_fiber" }
   },
   "pattern": [
     "C C",
-    "CGC",
+    "CSC",
     "CGC"
   ],
   "result": {

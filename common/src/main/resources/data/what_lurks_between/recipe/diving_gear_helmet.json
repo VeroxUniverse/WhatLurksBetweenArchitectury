@@ -3,11 +3,12 @@
   "category": "equipment",
   "key": {
     "C": { "item": "minecraft:iron_ingot" },
-    "G": { "item": "minecraft:glass" }
+    "G": { "item": "minecraft:glass" },
+    "S": { "item": "what_lurks_between:mire_fiber" }
   },
   "pattern": [
     "CCC",
-    "CGC",
+    "SGS",
     "CCC"
   ],
   "result": {

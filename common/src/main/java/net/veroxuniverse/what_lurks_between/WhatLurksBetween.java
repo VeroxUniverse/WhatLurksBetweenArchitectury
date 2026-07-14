@@ -19,12 +19,15 @@ public final class WhatLurksBetween {
         ModConfig.INSTANCE = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
         ModMobEffects.register();
         //ModAttributes.register();
+        ModSounds.register();
+        ModFeatures.register();
         ModBlocks.register();
         ModItems.register();
         ModFrogVariants.register();
         ModTabs.register();
         ModTerrablender.register();
         SanityConditionManager.registerCondition(new BiomeSanityProtectionCondition());
+        ModSanityEffects.register();
     }
 
     public static void initAzIdentityRegistry() {

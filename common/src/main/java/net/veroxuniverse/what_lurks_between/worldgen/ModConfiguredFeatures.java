@@ -24,6 +24,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTes
 import net.veroxuniverse.what_lurks_between.WhatLurksBetween;
 import net.veroxuniverse.what_lurks_between.block.MireReedBlock;
 import net.veroxuniverse.what_lurks_between.registry.ModBlocks;
+import net.veroxuniverse.what_lurks_between.registry.ModFeatures;
 import net.veroxuniverse.what_lurks_between.worldgen.tree.GhostWillowTreeFeature;
 
 public class ModConfiguredFeatures {
@@ -60,13 +61,13 @@ public class ModConfiguredFeatures {
                         )
                 )));
 
-        context.register(MIRE_LAKE, new ConfiguredFeature<>(Feature.LAKE,
+        context.register(MIRE_LAKE, new ConfiguredFeature<>(ModFeatures.MIRE_LAKE_FEATURE.get(),
                 new LakeFeature.Configuration(
                         BlockStateProvider.simple(Blocks.WATER.defaultBlockState()),
                         BlockStateProvider.simple(ModBlocks.ROCKY_MIRE_MUD.get().defaultBlockState())
                 )));
 
-        context.register(WET_MUD_LAKE, new ConfiguredFeature<>(Feature.LAKE,
+        context.register(WET_MUD_LAKE, new ConfiguredFeature<>(ModFeatures.MIRE_LAKE_FEATURE.get(),
                 new LakeFeature.Configuration(
                         BlockStateProvider.simple(ModBlocks.WET_MIRE_MUD.get().defaultBlockState()),
                         BlockStateProvider.simple(ModBlocks.ROCKY_MIRE_MUD.get().defaultBlockState())

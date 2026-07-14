@@ -53,6 +53,8 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.TENTACLE_GRASS.get());
 
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .add(ModBlocks.COBBLED_ABYSSAL_STONE.get())
+                .add(ModBlocks.ABYSSAL_STONE.get())
                 .add(ModBlocks.MIRE_ROCK.get());
 
         tag(BlockTags.MINEABLE_WITH_AXE)

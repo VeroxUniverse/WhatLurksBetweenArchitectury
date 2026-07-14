@@ -35,32 +35,4 @@ public class MireMudBlock extends Block {
         return Shapes.block();
     }
 
-    @Override
-    protected boolean isRandomlyTicking(BlockState state) {
-        return true;
-    }
-
-    private static boolean canReceiveMoss(ServerLevel level, BlockPos pos) {
-        BlockPos abovePos = pos.above();
-        int skyLight = level.getBrightness(LightLayer.SKY, abovePos);
-
-        return level.getFluidState(abovePos).isEmpty() &&
-                skyLight >= 9 &&
-                !level.getBlockState(abovePos).isSolid();
-    }
-
-    @Override
-    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (!level.isClientSide && canReceiveMoss(level, pos)) {
-            for (int i = 0; i < 4; ++i) {
-                BlockPos neighborPos = pos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-                BlockState sourceState = level.getBlockState(neighborPos);
-
-                if (sourceState.is(ModBlocks.MIRE_MOSS.get()) || sourceState.is(ModBlocks.MOSSY_MIRE_MUD.get())) {
-                    level.setBlockAndUpdate(pos, ModBlocks.MOSSY_MIRE_MUD.get().defaultBlockState());
-                    return;
-                }
-            }
-        }
-    }
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "what_lurks_between:block/cracked_bone_block_top",
+    "side": "what_lurks_between:block/cracked_bone_block"
+  }
+}

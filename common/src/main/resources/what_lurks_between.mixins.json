@@ -6,7 +6,8 @@
   "client": [
   ],
   "mixins": [
-    "LivingEntityMudMixin"
+    "LivingEntityMudMixin",
+    "FrogMixin"
   ],
   "injectors": {
     "defaultRequire": 1

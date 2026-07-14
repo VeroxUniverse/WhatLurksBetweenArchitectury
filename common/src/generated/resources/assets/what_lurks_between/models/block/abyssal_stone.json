@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "what_lurks_between:block/abyssal_stone_top",
+    "side": "what_lurks_between:block/abyssal_stone"
+  }
+}

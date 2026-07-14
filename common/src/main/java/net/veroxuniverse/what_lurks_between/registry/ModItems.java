@@ -27,6 +27,9 @@ public class ModItems {
     public static final RegistrySupplier<Item> WILLOW_TEAR = ITEMS.register("willow_tear",
             () -> new Item(new Item.Properties().arch$tab(ModTabs.ITEMS_TAB)));
 
+    public static final RegistrySupplier<Item> PALE_FIREFLIES_BOTTLE = ITEMS.register("pale_fireflies_bottle",
+            () -> new Item(new Item.Properties().arch$tab(ModTabs.ITEMS_TAB)));
+
     public static final RegistrySupplier<Item> MIRE_FIBER = ITEMS.register("mire_fiber",
             () -> new Item(new Item.Properties().arch$tab(ModTabs.ITEMS_TAB)));
 

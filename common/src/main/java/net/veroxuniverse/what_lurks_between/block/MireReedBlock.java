@@ -90,9 +90,13 @@ public class MireReedBlock extends CropBlock implements SimpleWaterloggedBlock {
     private void applyGrowth(ServerLevel level, BlockPos pos, BlockState state, int nextAge) {
         level.setBlock(pos, this.getStateForAge(nextAge).setValue(HALF, DoubleBlockHalf.LOWER).setValue(WATERLOGGED, state.getValue(WATERLOGGED)), 2);
 
-        if (nextAge >= 5) {
+        if (nextAge >= 6) {
             BlockPos abovePos = pos.above();
-            if (level.isEmptyBlock(abovePos) || level.getFluidState(abovePos).is(Fluids.WATER)) {
+            BlockState aboveState = level.getBlockState(abovePos);
+            boolean isExistingUpperHalf = aboveState.is(this) && aboveState.getValue(HALF) == DoubleBlockHalf.UPPER;
+            boolean canPlaceUpper = level.isEmptyBlock(abovePos) || level.getFluidState(abovePos).is(Fluids.WATER) || isExistingUpperHalf;
+
+            if (canPlaceUpper) {
                 boolean isWaterAbove = level.getFluidState(abovePos).is(Fluids.WATER);
                 level.setBlock(abovePos, this.getStateForAge(nextAge).setValue(HALF, DoubleBlockHalf.UPPER).setValue(WATERLOGGED, isWaterAbove), 2);
             }

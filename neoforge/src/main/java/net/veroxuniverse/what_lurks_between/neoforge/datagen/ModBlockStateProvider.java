@@ -80,6 +80,21 @@ public class ModBlockStateProvider extends BlockStateProvider {
                         modLoc("block/ghost_willow_sapling")).renderType("cutout"));
 
         blockSet(ModBlocks.GHOST_WILLOW);
+
+        logBlock((RotatedPillarBlock) ModBlocks.CRACKED_BONE_BLOCK.get());
+        simpleBlockItem(ModBlocks.CRACKED_BONE_BLOCK.get(),
+                models().withExistingParent("cracked_bone_block", "minecraft:block/cube_column")
+                        .texture("side", modLoc("block/cracked_bone_block"))
+                        .texture("end", modLoc("block/cracked_bone_block_top")));
+
+        logBlock((RotatedPillarBlock) ModBlocks.ABYSSAL_STONE.get());
+        simpleBlockItem(ModBlocks.ABYSSAL_STONE.get(),
+                models().withExistingParent("abyssal_stone", "minecraft:block/cube_column")
+                        .texture("side", modLoc("block/abyssal_stone"))
+                        .texture("end", modLoc("block/abyssal_stone_top")));
+
+        simpleBlockWithItem(ModBlocks.COBBLED_ABYSSAL_STONE.get(), cubeAll(ModBlocks.COBBLED_ABYSSAL_STONE.get()));
+
     }
 
     private void topBottomBlock(Block block, String side, String topBottom) {

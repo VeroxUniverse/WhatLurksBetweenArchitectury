@@ -34,7 +34,7 @@ public class ModRecipeProvider extends RecipeProvider {
         doorBuilder(ModBlocks.GHOST_WILLOW_DOOR.get(), Ingredient.of(ModBlocks.GHOST_WILLOW_PLANKS.get())).unlockedBy("has_planks", has(ModBlocks.GHOST_WILLOW_PLANKS.get())).save(output);
         trapdoorBuilder(ModBlocks.GHOST_WILLOW_TRAPDOOR.get(), Ingredient.of(ModBlocks.GHOST_WILLOW_PLANKS.get())).unlockedBy("has_planks", has(ModBlocks.GHOST_WILLOW_PLANKS.get())).save(output);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.MIRE_FIBER.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.MIRE_FIBER.get(), 3)
                 .pattern("###")
                 .define('#', ModBlocks.WHISTLING_REEDS.get())
                 .unlockedBy("has_whistling_reeds", has(ModBlocks.WHISTLING_REEDS.get()))

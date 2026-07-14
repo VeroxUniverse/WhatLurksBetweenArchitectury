@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -46,15 +47,31 @@ public class MossyMireMudBlock extends Block {
             return false;
         }
 
-        return level.getBrightness(net.minecraft.world.level.LightLayer.SKY, abovePos) >= 4 ||
-                level.getBrightness(net.minecraft.world.level.LightLayer.BLOCK, abovePos) >= 4;
+        return level.getBrightness(LightLayer.SKY, abovePos) >= 4 ||
+                level.getBrightness(LightLayer.BLOCK, abovePos) >= 4;
     }
 
     @Override
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (!level.isClientSide) {
-            if (!canMossSurvive(level, pos)) {
-                level.setBlockAndUpdate(pos, ModBlocks.MIRE_MUD.get().defaultBlockState());
+        if (level.isClientSide) return;
+
+        if (!canMossSurvive(level, pos)) {
+            level.setBlockAndUpdate(pos, ModBlocks.MIRE_MUD.get().defaultBlockState());
+            return;
+        }
+
+        BlockState spreadState = this.defaultBlockState();
+
+        for (int i = 0; i < 4; i++) {
+            BlockPos targetPos = pos.offset(
+                    random.nextInt(3) - 1,
+                    random.nextInt(5) - 3,
+                    random.nextInt(3) - 1
+            );
+
+            if (level.getBlockState(targetPos).is(ModBlocks.MIRE_MUD.get())
+                    && canMossSurvive(level, targetPos)) {
+                level.setBlockAndUpdate(targetPos, spreadState);
             }
         }
     }
