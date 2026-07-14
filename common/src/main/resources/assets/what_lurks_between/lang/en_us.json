@@ -28,10 +28,15 @@
   "block.what_lurks_between.ghost_willow_pressure_plate": "Ghost Willow Pressure Plate",
   "block.what_lurks_between.ghost_willow_roots": "Ghost Willow Roots",
   "block.what_lurks_between.ghost_willow_sapling": "Ghost Willow Sapling",
+  "block.what_lurks_between.cracked_bone_block": "Wethered Bone Block",
+  "block.what_lurks_between.abyssal_stone": "Abyssal Stone",
+  "block.what_lurks_between.cobbled:abyssal_stone": "Abyssal Cobblestone",
+  "block.what_lurks_between.abyssal_vent": "Abyssal Vent",
 
   "item.what_lurks_between.wet_mire_mud_bucket": "Wet Mire Mud Bucket",
   "item.what_lurks_between.void_pearl": "Void Pearl",
   "item.what_lurks_between.willow_tear": "Willow Tear",
+  "item.what_lurks_between.pale_fireflies_bottle": "Pale Firefly Bottle",
   "item.what_lurks_between.mire_fiber": "Mire Fiber",
   "item.what_lurks_between.whistling_reeds_seeds": "Whistling Reeds Seeds",
 

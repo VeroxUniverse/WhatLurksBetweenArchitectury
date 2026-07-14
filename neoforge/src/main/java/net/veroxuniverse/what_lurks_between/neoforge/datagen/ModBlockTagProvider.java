@@ -142,6 +142,11 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.ROCKY_MIRE_MUD.get())
                 .add(ModBlocks.WET_MIRE_MUD.get());
 
+        tag(BlockTags.FROGS_SPAWNABLE_ON)
+                .add(ModBlocks.MIRE_MOSS.get())
+                .add(ModBlocks.MOSSY_MIRE_MUD.get())
+                .add(ModBlocks.MIRE_MUD.get());
+
         tag(BlockTags.ANIMALS_SPAWNABLE_ON)
                 .add(ModBlocks.MIRE_MOSS.get())
                 .add(ModBlocks.MOSSY_MIRE_MUD.get())

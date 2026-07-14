@@ -55,69 +55,69 @@
       {
         "type": "minecraft:frog",
         "maxCount": 5,
-        "minCount": 2,
-        "weight": 10
+        "minCount": 3,
+        "weight": 25
       },
       {
         "type": "minecraft:sheep",
         "maxCount": 3,
         "minCount": 2,
-        "weight": 12
+        "weight": 8
       },
       {
         "type": "minecraft:chicken",
         "maxCount": 4,
         "minCount": 2,
-        "weight": 10
+        "weight": 6
       },
       {
         "type": "minecraft:pig",
         "maxCount": 3,
         "minCount": 1,
-        "weight": 10
+        "weight": 6
       }
     ],
     "misc": [],
     "monster": [
       {
-        "type": "minecraft:creeper",
-        "maxCount": 4,
+        "type": "minecraft:bogged",
+        "maxCount": 3,
         "minCount": 1,
-        "weight": 100
+        "weight": 60
       },
       {
         "type": "minecraft:zombie",
-        "maxCount": 4,
-        "minCount": 1,
-        "weight": 95
-      },
-      {
-        "type": "minecraft:spider",
-        "maxCount": 4,
-        "minCount": 1,
-        "weight": 100
-      },
-      {
-        "type": "minecraft:skeleton",
-        "maxCount": 4,
-        "minCount": 1,
-        "weight": 70
-      },
-      {
-        "type": "minecraft:bogged",
-        "maxCount": 4,
+        "maxCount": 3,
         "minCount": 1,
         "weight": 30
       },
       {
-        "type": "minecraft:enderman",
-        "maxCount": 4,
+        "type": "minecraft:spider",
+        "maxCount": 3,
         "minCount": 1,
-        "weight": 10
+        "weight": 25
+      },
+      {
+        "type": "minecraft:skeleton",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 20
+      },
+      {
+        "type": "minecraft:creeper",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 20
       },
       {
         "type": "minecraft:witch",
         "maxCount": 1,
+        "minCount": 1,
+        "weight": 8
+      },
+      {
+        "type": "minecraft:enderman",
+        "maxCount": 2,
         "minCount": 1,
         "weight": 5
       },
@@ -125,7 +125,7 @@
         "type": "minecraft:zombie_villager",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 5
+        "weight": 3
       },
       {
         "type": "minecraft:slime",
